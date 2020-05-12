@@ -45,15 +45,23 @@ namespace ClientProject
                 Form1 Form1 = new Form1();
                 Form1.ClientUsername = clientUsername;
                 Form1.Owner = this;
+                disconnectButton.Visible = true;
                 Form1.Show();
-                //Hide();
+                
             }
+        }
+        private void CloseForm1()
+        {
+            this.Close();
         }
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
         {
             e.Cancel = false;
-            
         }
- 
+
+        private void disconnectButton_Click(object sender, EventArgs e)
+        {
+            CloseForm1();
+        }
     }
 }

@@ -254,8 +254,11 @@ namespace ClientProject
                 client.Close();
                 this.Owner.Show();
             }
+            else
+            {
+                e.Cancel = true;
+            }
         }
-     
         private void VisibleSettings(bool isVisible)
         {
             participantsListBox.Visible = isVisible;

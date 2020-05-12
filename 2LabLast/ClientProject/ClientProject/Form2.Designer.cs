@@ -33,6 +33,7 @@
             this.clientNameTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.clientLastNameTextBox = new System.Windows.Forms.TextBox();
+            this.disconnectButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label3
@@ -82,11 +83,24 @@
             this.clientLastNameTextBox.Size = new System.Drawing.Size(264, 20);
             this.clientLastNameTextBox.TabIndex = 13;
             // 
+            // disconnectButton
+            // 
+            this.disconnectButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.disconnectButton.Location = new System.Drawing.Point(189, 269);
+            this.disconnectButton.Name = "disconnectButton";
+            this.disconnectButton.Size = new System.Drawing.Size(264, 39);
+            this.disconnectButton.TabIndex = 15;
+            this.disconnectButton.Text = "Disconnect";
+            this.disconnectButton.UseVisualStyleBackColor = true;
+            this.disconnectButton.Visible = false;
+            this.disconnectButton.Click += new System.EventHandler(this.disconnectButton_Click);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(677, 352);
+            this.Controls.Add(this.disconnectButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.clientLastNameTextBox);
             this.Controls.Add(this.label3);
@@ -107,5 +121,6 @@
         private System.Windows.Forms.TextBox clientNameTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox clientLastNameTextBox;
+        private System.Windows.Forms.Button disconnectButton;
     }
 }
