@@ -96,7 +96,7 @@ namespace ClientProject
         {
             Action action = delegate
             {
-                string serverInfo = serverUdpAnswerMessage.ServerName + " port: " + serverUdpAnswerMessage.SenderPort;
+                string serverInfo = serverUdpAnswerMessage.ServerName + " port: " + serverUdpAnswerMessage.SenderPort + " ip: " + serverUdpAnswerMessage.SenderIp;
                 serversListBox.Items.Add(serverInfo);
                 
             };
