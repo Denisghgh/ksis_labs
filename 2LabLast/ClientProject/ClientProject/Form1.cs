@@ -325,5 +325,12 @@ namespace ClientProject
         {
             this.Owner.Hide();
         }
+
+        private void chatTextBox_TextChanged(object sender, EventArgs e)
+        {
+            chatTextBox.SelectionStart = chatTextBox.Text.Length;
+            chatTextBox.ScrollToCaret();
+            chatTextBox.Refresh();
+        }
     }
 }

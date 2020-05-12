@@ -87,8 +87,10 @@
             this.chatTextBox.Location = new System.Drawing.Point(146, 48);
             this.chatTextBox.Multiline = true;
             this.chatTextBox.Name = "chatTextBox";
+            this.chatTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.chatTextBox.Size = new System.Drawing.Size(380, 160);
             this.chatTextBox.TabIndex = 5;
+            this.chatTextBox.TextChanged += new System.EventHandler(this.chatTextBox_TextChanged);
             // 
             // label2
             // 
