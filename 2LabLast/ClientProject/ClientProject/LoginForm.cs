@@ -1,17 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using CommonLibrary;
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using Message = CommonLibrary.Messages;
 
 namespace ClientProject
 {
@@ -23,7 +11,7 @@ namespace ClientProject
         {
             InitializeComponent();
         }
-       
+
         private bool ClientUserNameCheck(ref string clientUsername)
         {
             if (clientNameTextBox.Text != "")
@@ -47,7 +35,7 @@ namespace ClientProject
                 Form1.Owner = this;
                 disconnectButton.Visible = true;
                 Form1.Show();
-                
+
             }
         }
         private void CloseForm1()

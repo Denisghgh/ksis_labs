@@ -41,6 +41,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.roomsListBox = new System.Windows.Forms.ListBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // serversListBox
@@ -108,7 +110,7 @@
             this.participantsListBox.FormattingEnabled = true;
             this.participantsListBox.Location = new System.Drawing.Point(532, 48);
             this.participantsListBox.Name = "participantsListBox";
-            this.participantsListBox.Size = new System.Drawing.Size(131, 186);
+            this.participantsListBox.Size = new System.Drawing.Size(131, 82);
             this.participantsListBox.TabIndex = 7;
             this.participantsListBox.SelectedIndexChanged += new System.EventHandler(this.participantsListBox_SelectedIndexChanged);
             // 
@@ -169,11 +171,31 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.CreateRoomButton_Click);
             // 
-            // Form1
+            // roomsListBox
+            // 
+            this.roomsListBox.FormattingEnabled = true;
+            this.roomsListBox.Location = new System.Drawing.Point(532, 157);
+            this.roomsListBox.Name = "roomsListBox";
+            this.roomsListBox.Size = new System.Drawing.Size(131, 82);
+            this.roomsListBox.TabIndex = 16;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label6.Location = new System.Drawing.Point(528, 133);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(112, 22);
+            this.label6.TabIndex = 17;
+            this.label6.Text = "Rooms List:";
+            // 
+            // ChatForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(692, 312);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.roomsListBox);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -187,7 +209,7 @@
             this.Controls.Add(this.connectButton);
             this.Controls.Add(this.serversListBox);
             this.Controls.Add(this.label3);
-            this.Name = "Form1";
+            this.Name = "ChatForm";
             this.Text = "Chat";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -210,6 +232,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ListBox roomsListBox;
+        private System.Windows.Forms.Label label6;
     }
 }
 

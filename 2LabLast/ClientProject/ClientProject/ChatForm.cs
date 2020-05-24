@@ -231,8 +231,28 @@ namespace ClientProject
             }  
         }
 
+        private void AddRoomToRoomsListBox(CreateRoomResponseMessage createRoomResponseMessage)
+        {
+            Action action = delegate
+            {
+                roomsListBox.Items.Add(createRoomResponseMessage.RoomInfo.RoomName);
+            };
+            if (InvokeRequired)
+            {
+                Invoke(action);
+            }
+            else
+            {
+                action();
+            }
+        }
+
         public void ShowReceivedMessage(Messages message)
         {
+            if (message is CreateRoomResponseMessage)
+            {
+                AddRoomToRoomsListBox((CreateRoomResponseMessage)message);
+            }
             if (message is ServerUdpAnswerMessages)
             {
                 AddServerInfoToServersListBox((ServerUdpAnswerMessages)message);
@@ -322,7 +342,7 @@ namespace ClientProject
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.Owner.Hide();
+            Owner.Hide();
         }
 
         private void chatTextBox_TextChanged(object sender, EventArgs e)

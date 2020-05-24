@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace CommonLibrary
 {
-    public class Room
+    [Serializable]
+    public class RoomCreateInfo
     {
         public string RoomName { get; private set; }
         public List<int> RoomParticipants { get; private set; }
 
-        public Room(string roomName, List<int> roomParticipants)
+        public RoomCreateInfo(string roomName, List<int> roomParticipants)
         {
             RoomName = roomName;
             RoomParticipants = roomParticipants;

@@ -17,7 +17,7 @@ namespace ServerProject
         private const int CommonChatId = 0;
         private string name;
         private List<ClientHandler> clients;
-        private List<Room> rooms;
+        private List<RoomCreateInfo> rooms;
         private List<Messages> messageHistory;
         private Socket tcpSocket;
         private Socket udpSocket;
@@ -32,7 +32,7 @@ namespace ServerProject
             messageHistory = new List<Messages>();
             listenUdpThread = new Thread(ListenUdp);
             listenTcpThread = new Thread(ListenTcp);
-            rooms = new List<Room>();
+            rooms = new List<RoomCreateInfo>();
         }
 
         public void Close()
@@ -205,18 +205,41 @@ namespace ServerProject
             }
         }
 
-        private void AddNewRoom(CreateRoomRequestMessage createRoomRequestMessage)
+        private int AddNewRoom(CreateRoomRequestMessage createRoomRequestMessage)
         {
             var roomName = createRoomRequestMessage.RoomName;
             var roomParticipantsIndecies = createRoomRequestMessage.RoomParticipantsIndecies;
-            var room = new Room(roomName, roomParticipantsIndecies);
+            var room = new RoomCreateInfo(roomName, roomParticipantsIndecies);
             rooms.Add(room);
+            return rooms.IndexOf(room);
+        }
+
+        private bool IsRoomParticipantClient(int roomId, int clientId)
+        {
+            var room = rooms[roomId];
+            var roomPerticipantIndecies = room.RoomParticipants;
+            foreach (var participantIndex in roomPerticipantIndecies)
+            {
+                if (clientId == participantIndex)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         private void HandleCreateRommRequestMessage(CreateRoomRequestMessage createRoomRequestMessage)
         {
-            AddNewRoom(createRoomRequestMessage);
-            // ответ
+            var roomId = AddNewRoom(createRoomRequestMessage);
+            var roomName = createRoomRequestMessage.RoomName;
+            var createRoomResponseMessage = GetCreateRoomResponseMessage(roomId, roomName);
+            foreach (var clientHandler in clients)
+            {
+                if (IsRoomParticipantClient(roomId, clientHandler.id))
+                {
+                    SendMessageToClient(createRoomResponseMessage, clientHandler);
+                }
+            }
         }
 
         public void HandleReceivedMessage(Messages message)
@@ -269,6 +292,12 @@ namespace ServerProject
         private void WriteLine(string content)
         {
             Console.WriteLine("[" + DateTime.Now.ToString() + "]: " + content + ";");
+        }
+
+        private CreateRoomResponseMessage GetCreateRoomResponseMessage(int roomId, string roomName)
+        {
+            IPEndPoint serverIp = (IPEndPoint)(tcpSocket.LocalEndPoint);
+            return new CreateRoomResponseMessage(DateTime.Now, serverIp.Address, serverIp.Port, new RoomInfo(roomName, roomId));
         }
 
         private ServerUdpAnswerMessages GetServerUdpAnswerMessage() 

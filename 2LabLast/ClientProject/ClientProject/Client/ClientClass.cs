@@ -17,6 +17,7 @@ namespace ClientProject
         public int id;
         private List<ServerInfo> serversInfo;
         public List<NewChatParticipant> participants;
+        public List<RoomInfo> rooms;
         private Socket tcpSocket;
         private Socket udpSocket;
         private Thread listenUdpThread;
@@ -36,6 +37,7 @@ namespace ClientProject
             udpSocket.EnableBroadcast = true;
             listenUdpThread = new Thread(ListenUdp);
             listenTcpThread = new Thread(ListenTcp);
+            rooms = new List<RoomInfo>();
         }
 
         public void ConnectToServer(int serverIndex, string clientName)
@@ -109,11 +111,20 @@ namespace ClientProject
             }
         }
 
+        private void AddNewRoom(CreateRoomResponseMessage createRoomResponseMessage)
+        {
+            rooms.Add(createRoomResponseMessage.RoomInfo);
+        }
+
         public void HandleReceivedMessage(Messages message)
         {
             if (message is ServerUdpAnswerMessages)
             {
                 AddNewServerInfo((ServerUdpAnswerMessages)message);
+            }
+            if (message is CreateRoomResponseMessage)
+            {
+                AddNewRoom((CreateRoomResponseMessage)message);
             }
             if (message is ParticipantsListMessages)
             {
