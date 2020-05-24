@@ -178,6 +178,7 @@
             this.roomsListBox.Name = "roomsListBox";
             this.roomsListBox.Size = new System.Drawing.Size(131, 82);
             this.roomsListBox.TabIndex = 16;
+            this.roomsListBox.SelectedIndexChanged += new System.EventHandler(this.roomsListBox_SelectedIndexChanged);
             // 
             // label6
             // 

@@ -242,6 +242,17 @@ namespace ServerProject
             }
         }
 
+        private void HandleRoomMessage(RoomMessage roomMessage)
+        {
+            foreach (var clientHandler in clients)
+            {
+                if (IsRoomParticipantClient(roomMessage.RoomId, clientHandler.id))
+                {
+                    SendMessageToClient(roomMessage, clientHandler);
+                }
+            }
+        }
+
         public void HandleReceivedMessage(Messages message)
         {
             if (message is ClientUdpRequestMessages)
@@ -254,7 +265,12 @@ namespace ServerProject
                 CreateRoomRequestMessage createRoomRequestMessage = (CreateRoomRequestMessage)message;
                 HandleCreateRommRequestMessage(createRoomRequestMessage);
             }
-            if (message is IndividualChatMessages)
+            if (message is RoomMessage)
+            {
+                RoomMessage roomMessage = (RoomMessage)message;
+                HandleRoomMessage(roomMessage);
+            } 
+            else if (message is IndividualChatMessages)
             {
                 IndividualChatMessages individualChatMessage = (IndividualChatMessages)message;
                 HandleIndividualChatMessage(individualChatMessage);
@@ -297,7 +313,7 @@ namespace ServerProject
         private CreateRoomResponseMessage GetCreateRoomResponseMessage(int roomId, string roomName)
         {
             IPEndPoint serverIp = (IPEndPoint)(tcpSocket.LocalEndPoint);
-            return new CreateRoomResponseMessage(DateTime.Now, serverIp.Address, serverIp.Port, new RoomInfo(roomName, roomId));
+            return new CreateRoomResponseMessage(DateTime.Now, serverIp.Address, serverIp.Port, new RoomInfo(roomName, roomId, new List<Messages>()));
         }
 
         private ServerUdpAnswerMessages GetServerUdpAnswerMessage() 

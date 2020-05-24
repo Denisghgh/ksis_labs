@@ -116,6 +116,12 @@ namespace ClientProject
             rooms.Add(createRoomResponseMessage.RoomInfo);
         }
 
+        private void HandleRoomMessage(RoomMessage roomMessage)
+        {
+            var room = rooms[roomMessage.RoomId];
+            room.MessageHistory.Add(roomMessage);
+        }
+
         public void HandleReceivedMessage(Messages message)
         {
             if (message is ServerUdpAnswerMessages)
@@ -135,7 +141,11 @@ namespace ClientProject
                 HandleMessagesHistoryMessage((MessagesHistoryMessage)message);
                 return;
             }
-            if ((message is IndividualChatMessages) || (message is CommonChatMessages))
+            if (message is RoomMessage)
+            {
+                HandleRoomMessage((RoomMessage)message);
+            }
+            else if ((message is IndividualChatMessages) || (message is CommonChatMessages))
             {
                 HandleChatMessage((CommonChatMessages)message);
             }
@@ -234,6 +244,12 @@ namespace ClientProject
             }
         }
 
+        public void SendRoomMessage(string content, int selectedRoom)
+        {
+            var roomMessage = GetRoomMessage(content, selectedRoom);
+            tcpSocket.Send(messageSerializer.Serialize(roomMessage));
+        }
+
         public void SendMessage(Messages message)
         {
             tcpSocket.Send(messageSerializer.Serialize(message));
@@ -251,6 +267,12 @@ namespace ClientProject
             FunctionsCommon.CloseAndNullSocket(ref udpSocket);
             FunctionsCommon.CloseAndNullThread(ref listenTcpThread);
             FunctionsCommon.CloseAndNullThread(ref listenUdpThread);
+        }
+
+        private RoomMessage GetRoomMessage(string content, int selectedRoom)
+        {
+            IPEndPoint clientIp = (IPEndPoint)(tcpSocket.LocalEndPoint);
+            return new RoomMessage(DateTime.Now, clientIp.Address, clientIp.Port, content, id, selectedRoom);
         }
 
         private CreateRoomRequestMessage GetCreateRoomRequestMessage(string roomName, List<int> roomParticipantsIndecies)

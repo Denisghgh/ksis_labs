@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CommonLibrary
 {
@@ -11,11 +8,13 @@ namespace CommonLibrary
     {
         public string RoomName { get; private set; }
         public int RoomId { get; private set; }
+        public List<Messages> MessageHistory { get; private set; }
 
-        public RoomInfo(string roomName, int roomId)
+        public RoomInfo(string roomName, int roomId, List<Messages> messagesHistory)
         {
             RoomName = roomName;
             RoomId = roomId;
+            MessageHistory = messagesHistory;
         }
     }
 }

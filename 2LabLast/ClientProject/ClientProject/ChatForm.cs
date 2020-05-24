@@ -13,7 +13,8 @@ namespace ClientProject
         private const string CommonChatName = "Common";
         private const int CommonChatId = 0;
         public ClientClass client;
-        private int selectedDialog;
+        private int selectedDialog = -1;
+        private int selectedRoom = -1;
         private string clientUsername;
         public string ClientUsername
         {
@@ -247,6 +248,26 @@ namespace ClientProject
             }
         }
 
+        private void HandleRoomMessage(RoomMessage roomMessage)
+        {
+            Action action = delegate
+            {
+                if (selectedRoom == roomMessage.RoomId)
+                {
+                    string chatContent = "[" + roomMessage.DateTime.ToString() + " " + roomMessage.SenderIp.ToString() + ":" + roomMessage.SenderPort + "]: \"" + client.participants[roomMessage.SenderId].Name + "\": " + roomMessage.Content + "\r\n";
+                    chatTextBox.Text += chatContent;
+                }
+            };
+            if (InvokeRequired)
+            {
+                Invoke(action);
+            }
+            else
+            {
+                action();
+            }
+        }
+
         public void ShowReceivedMessage(Messages message)
         {
             if (message is CreateRoomResponseMessage)
@@ -260,6 +281,10 @@ namespace ClientProject
             else if (message is ParticipantsListMessages)
             {
                 RefreshParticipantsListBox((ParticipantsListMessages)message);
+            }
+            else if (message is RoomMessage)
+            {
+                HandleRoomMessage((RoomMessage)message);
             }
             else if (message is CommonChatMessages)
             {
@@ -308,7 +333,14 @@ namespace ClientProject
         }
         private void sendMessageButton_Click(object sender, EventArgs e)
         {
-            client.SendMessage(messageTextBox.Text, selectedDialog);
+            if (roomsListBox.SelectedIndex == -1)
+            {
+                client.SendMessage(messageTextBox.Text, selectedDialog);
+            }
+            else
+            {
+                client.SendRoomMessage(messageTextBox.Text, roomsListBox.SelectedIndex);
+            }
             messageTextBox.Clear();
         }
 
@@ -331,8 +363,18 @@ namespace ClientProject
             RefreshChatTextBox(newMessages);
         }
 
+        private void ChangeDialog(int selectedRoom)
+        {
+            var room = client.rooms[selectedRoom];
+            currentChatLabel.Text = room.RoomName;
+            List<Messages> newMessages = room.MessageHistory;
+            RefreshChatTextBox(newMessages);
+        }
+
         private void participantsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            roomsListBox.SelectedIndex = -1;
+            selectedRoom = -1;
             if ((participantsListBox.SelectedIndex != selectedDialog)&&(participantsListBox.SelectedIndex >= 0))
             {
                 selectedDialog = participantsListBox.SelectedIndex;
@@ -361,6 +403,17 @@ namespace ClientProject
             if (roomParticipantsIndecies != null && roomParticipantsIndecies.Count != 0)
             {
                 client.SendCreateRoomRequestMessage(roomName, roomParticipantsIndecies);
+            }
+        }
+
+        private void roomsListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            participantsListBox.SelectedIndex = -1;
+            selectedDialog = -1;
+            selectedRoom = roomsListBox.SelectedIndex;
+            if (selectedRoom >= 0)
+            {
+                ChangeDialog(roomsListBox.SelectedIndex);
             }
         }
     }
