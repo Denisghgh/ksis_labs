@@ -13,10 +13,11 @@ namespace ServerProject
     {
         private const int MainServerPort = 8088;
         private const string CommonChatName = "Common";
-        private string name;
         private const int ClientsLimits = 15;
         private const int CommonChatId = 0;
+        private string name;
         private List<ClientHandler> clients;
+        private List<Room> rooms;
         private List<Messages> messageHistory;
         private Socket tcpSocket;
         private Socket udpSocket;
@@ -31,6 +32,7 @@ namespace ServerProject
             messageHistory = new List<Messages>();
             listenUdpThread = new Thread(ListenUdp);
             listenTcpThread = new Thread(ListenTcp);
+            rooms = new List<Room>();
         }
 
         public void Close()
@@ -203,12 +205,31 @@ namespace ServerProject
             }
         }
 
+        private void AddNewRoom(CreateRoomRequestMessage createRoomRequestMessage)
+        {
+            var roomName = createRoomRequestMessage.RoomName;
+            var roomParticipantsIndecies = createRoomRequestMessage.RoomParticipantsIndecies;
+            var room = new Room(roomName, roomParticipantsIndecies);
+            rooms.Add(room);
+        }
+
+        private void HandleCreateRommRequestMessage(CreateRoomRequestMessage createRoomRequestMessage)
+        {
+            AddNewRoom(createRoomRequestMessage);
+            // ответ
+        }
+
         public void HandleReceivedMessage(Messages message)
         {
             if (message is ClientUdpRequestMessages)
             {
                 ClientUdpRequestMessages clientUdpRequestMessage = (ClientUdpRequestMessages)message;               
                 HandleClientUdpRequestMessage(clientUdpRequestMessage);              
+            }
+            if (message is CreateRoomRequestMessage)
+            {
+                CreateRoomRequestMessage createRoomRequestMessage = (CreateRoomRequestMessage)message;
+                HandleCreateRommRequestMessage(createRoomRequestMessage);
             }
             if (message is IndividualChatMessages)
             {

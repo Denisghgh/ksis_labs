@@ -54,6 +54,7 @@
     <Compile Include="Messages\ServerUdpAnswerMessages.cs" />
     <Compile Include="FunctionsCommon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Room.cs" />
     <Compile Include="Serializers\BinaryMessagesSerializer.cs" />
     <Compile Include="Serializers\IMessagesSerializer.cs" />
   </ItemGroup>

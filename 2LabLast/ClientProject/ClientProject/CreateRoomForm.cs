@@ -47,7 +47,7 @@ namespace ClientProject
             var indices = RoomParticipantsCheckedlistBox.CheckedIndices;
             foreach (int index in indices)
             {
-                RoomParticipantsIndecies.Add(index);
+                RoomParticipantsIndecies.Add(index + 1);
             }
             Close();
         }
