@@ -14,7 +14,8 @@ namespace ClientProject
     public partial class CreateRoomForm : Form
     {
         public List<NewChatParticipant> ChatParticipants { get; set; }
-        public List<NewChatParticipant> RoomParticipants { get; private set; }
+        public List<int> RoomParticipantsIndecies { get; private set; }
+        public string RoomName { get; private set; }
 
         public CreateRoomForm(List<NewChatParticipant> chatParticipants)
         {
@@ -41,11 +42,12 @@ namespace ClientProject
 
         private void ConfirmButton_Click(object sender, EventArgs e)
         {
-            RoomParticipants = new List<NewChatParticipant>();
+            RoomName = RoomNameTextBox.Text;
+            RoomParticipantsIndecies = new List<int>();
             var indices = RoomParticipantsCheckedlistBox.CheckedIndices;
             foreach (int index in indices)
             {
-                RoomParticipants.Add(ChatParticipants[index]);
+                RoomParticipantsIndecies.Add(index);
             }
             Close();
         }

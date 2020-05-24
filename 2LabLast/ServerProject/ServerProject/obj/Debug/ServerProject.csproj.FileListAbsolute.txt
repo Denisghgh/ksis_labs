@@ -57,3 +57,12 @@ C:\Users\Denizka\Documents\GitHub\ksis_labs\2LabLast\ServerProject\ServerProject
 C:\Users\Denizka\Documents\GitHub\ksis_labs\2LabLast\ServerProject\ServerProject\obj\Debug\ServerProject.csproj.CopyComplete
 C:\Users\Denizka\Documents\GitHub\ksis_labs\2LabLast\ServerProject\ServerProject\obj\Debug\ServerProject.exe
 C:\Users\Denizka\Documents\GitHub\ksis_labs\2LabLast\ServerProject\ServerProject\obj\Debug\ServerProject.pdb
+C:\Users\asus\Desktop\ksis_labs\2LabLast\ServerProject\ServerProject\bin\Debug\ServerProject.exe.config
+C:\Users\asus\Desktop\ksis_labs\2LabLast\ServerProject\ServerProject\bin\Debug\ServerProject.exe
+C:\Users\asus\Desktop\ksis_labs\2LabLast\ServerProject\ServerProject\bin\Debug\ServerProject.pdb
+C:\Users\asus\Desktop\ksis_labs\2LabLast\ServerProject\ServerProject\bin\Debug\CommonLibrary.dll
+C:\Users\asus\Desktop\ksis_labs\2LabLast\ServerProject\ServerProject\bin\Debug\CommonLibrary.pdb
+C:\Users\asus\Desktop\ksis_labs\2LabLast\ServerProject\ServerProject\obj\Debug\ServerProject.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\ksis_labs\2LabLast\ServerProject\ServerProject\obj\Debug\ServerProject.csproj.CopyComplete
+C:\Users\asus\Desktop\ksis_labs\2LabLast\ServerProject\ServerProject\obj\Debug\ServerProject.exe
+C:\Users\asus\Desktop\ksis_labs\2LabLast\ServerProject\ServerProject\obj\Debug\ServerProject.pdb

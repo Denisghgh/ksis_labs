@@ -320,7 +320,6 @@ namespace ClientProject
             }
         }
 
-
         private void Form1_Load(object sender, EventArgs e)
         {
             this.Owner.Hide();
@@ -333,14 +332,15 @@ namespace ClientProject
             chatTextBox.Refresh();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void CreateRoomButton_Click(object sender, EventArgs e)
         {
             var createRoomForm = new CreateRoomForm(client.participants.GetRange(1, client.participants.Count - 1));
             createRoomForm.ShowDialog();
-            var roomParticipants = createRoomForm.RoomParticipants;
-            if (roomParticipants != null && roomParticipants.Count != 0)
+            var roomParticipantsIndecies = createRoomForm.RoomParticipantsIndecies;
+            var roomName = createRoomForm.RoomName;
+            if (roomParticipantsIndecies != null && roomParticipantsIndecies.Count != 0)
             {
-                // отправка сообщения серверу для регистрации комнаты
+                client.SendCreateRoomRequestMessage(roomName, roomParticipantsIndecies);
             }
         }
     }

@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Messages\CreateRoomRequestMessage.cs" />
     <Compile Include="NewChatParticipant.cs" />
     <Compile Include="Messages\ClientUdpRequestMessages.cs" />
     <Compile Include="Messages\CommonChatMessages.cs" />

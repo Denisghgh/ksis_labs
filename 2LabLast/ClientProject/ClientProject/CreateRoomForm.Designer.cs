@@ -33,6 +33,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.ConfirmButton = new System.Windows.Forms.Button();
             this.CancelButton = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.RoomNameTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -50,7 +52,7 @@
             this.RoomParticipantsCheckedlistBox.FormattingEnabled = true;
             this.RoomParticipantsCheckedlistBox.Location = new System.Drawing.Point(17, 85);
             this.RoomParticipantsCheckedlistBox.Name = "RoomParticipantsCheckedlistBox";
-            this.RoomParticipantsCheckedlistBox.Size = new System.Drawing.Size(595, 289);
+            this.RoomParticipantsCheckedlistBox.Size = new System.Drawing.Size(595, 154);
             this.RoomParticipantsCheckedlistBox.TabIndex = 1;
             // 
             // label2
@@ -85,11 +87,30 @@
             this.CancelButton.UseVisualStyleBackColor = true;
             this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.Location = new System.Drawing.Point(12, 242);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(223, 29);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Название беседы:";
+            // 
+            // RoomNameTextBox
+            // 
+            this.RoomNameTextBox.Location = new System.Drawing.Point(17, 274);
+            this.RoomNameTextBox.Name = "RoomNameTextBox";
+            this.RoomNameTextBox.Size = new System.Drawing.Size(218, 20);
+            this.RoomNameTextBox.TabIndex = 6;
+            // 
             // CreateRoomForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(624, 442);
+            this.Controls.Add(this.RoomNameTextBox);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.ConfirmButton);
             this.Controls.Add(this.label2);
@@ -109,5 +130,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button ConfirmButton;
         private System.Windows.Forms.Button CancelButton;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox RoomNameTextBox;
     }
 }

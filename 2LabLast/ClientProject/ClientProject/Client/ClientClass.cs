@@ -3,18 +3,15 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace ClientProject
 {
     public delegate void ReceiveMessage(Messages message);
 
-     public class ClientClass 
+    public class ClientClass
     {
         private const int ServerPort = 8088;
         public int id;
@@ -48,7 +45,7 @@ namespace ClientProject
                 if ((serverIndex >= 0) && (serverIndex <= serversInfo.Count - 1))
                 {
                     tcpSocket.Connect(GetServerIpEndPoint(serverIndex));
-                    listenTcpThread.Start();                   
+                    listenTcpThread.Start();
                     SendMessage(GetRegistrationMessage(clientName));
                 }
             }
@@ -56,7 +53,7 @@ namespace ClientProject
             {
                 Debug.WriteLine(ex.Message);
                 Close();
-            }                
+            }
         }
 
         public void DisconnectFromServer()
@@ -79,7 +76,7 @@ namespace ClientProject
             }
         }
 
-        private void HandleParticipantsListMessage(ParticipantsListMessages participantsListMessage) 
+        private void HandleParticipantsListMessage(ParticipantsListMessages participantsListMessage)
         {
             participants = participantsListMessage.participants;
             SetEventsForParticipants();
@@ -109,25 +106,25 @@ namespace ClientProject
             else
             {
                 participants[0].NotReadedMessageCountIncrement(commonChatMessage);
-            }      
+            }
         }
 
         public void HandleReceivedMessage(Messages message)
         {
             if (message is ServerUdpAnswerMessages)
             {
-                AddNewServerInfo((ServerUdpAnswerMessages)message);        
+                AddNewServerInfo((ServerUdpAnswerMessages)message);
             }
             if (message is ParticipantsListMessages)
             {
-                HandleParticipantsListMessage((ParticipantsListMessages)message); 
+                HandleParticipantsListMessage((ParticipantsListMessages)message);
             }
             if (message is MessagesHistoryMessage)
             {
                 HandleMessagesHistoryMessage((MessagesHistoryMessage)message);
                 return;
             }
-            if ((message is IndividualChatMessages)||(message is CommonChatMessages))
+            if ((message is IndividualChatMessages) || (message is CommonChatMessages))
             {
                 HandleChatMessage((CommonChatMessages)message);
             }
@@ -159,7 +156,7 @@ namespace ClientProject
                         if (receivedDataBytesCount > 0)
                             HandleReceivedMessage(messageSerializer.Deserialize(memoryStream.ToArray()));
                     }
-                }              
+                }
             }
             catch (SocketException)
             {
@@ -211,7 +208,7 @@ namespace ClientProject
         public void SendMessage(string content, int selectedDialog)
         {
             if (participants[selectedDialog].Id == 0)
-            {        
+            {
                 tcpSocket.Send(messageSerializer.Serialize(GetCommonChatMessage(content)));
             }
             else
@@ -231,12 +228,24 @@ namespace ClientProject
             tcpSocket.Send(messageSerializer.Serialize(message));
         }
 
+        public void SendCreateRoomRequestMessage(string roomName, List<int> roomParticipantsIndecies)
+        {
+            var createRoomRequestMessage = GetCreateRoomRequestMessage(roomName, roomParticipantsIndecies);
+            tcpSocket.Send(messageSerializer.Serialize(createRoomRequestMessage));
+        }
+
         public void Close()
         {
             FunctionsCommon.CloseAndNullSocket(ref tcpSocket);
             FunctionsCommon.CloseAndNullSocket(ref udpSocket);
             FunctionsCommon.CloseAndNullThread(ref listenTcpThread);
             FunctionsCommon.CloseAndNullThread(ref listenUdpThread);
+        }
+
+        private CreateRoomRequestMessage GetCreateRoomRequestMessage(string roomName, List<int> roomParticipantsIndecies)
+        {
+            IPEndPoint clientIp = (IPEndPoint)(tcpSocket.LocalEndPoint);
+            return new CreateRoomRequestMessage(DateTime.Now, clientIp.Address, clientIp.Port, roomParticipantsIndecies, roomName);
         }
 
         private IndividualChatMessages GetIndividualChatMessage(string content, int receiverId)
@@ -271,7 +280,7 @@ namespace ClientProject
 
         private ServerInfo GetServerInfo(int serverIndex)
         {
-            if ((serverIndex >= 0)&&(serverIndex <= serversInfo.Count - 1))
+            if ((serverIndex >= 0) && (serverIndex <= serversInfo.Count - 1))
             {
                 return serversInfo[serverIndex];
             }
