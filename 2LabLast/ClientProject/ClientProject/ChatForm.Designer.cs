@@ -1,6 +1,6 @@
 ﻿namespace ClientProject
 {
-    partial class Form1
+    partial class ChatForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -40,6 +40,7 @@
             this.sendMessageButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // serversListBox
@@ -107,7 +108,7 @@
             this.participantsListBox.FormattingEnabled = true;
             this.participantsListBox.Location = new System.Drawing.Point(532, 48);
             this.participantsListBox.Name = "participantsListBox";
-            this.participantsListBox.Size = new System.Drawing.Size(131, 238);
+            this.participantsListBox.Size = new System.Drawing.Size(131, 186);
             this.participantsListBox.TabIndex = 7;
             this.participantsListBox.SelectedIndexChanged += new System.EventHandler(this.participantsListBox_SelectedIndexChanged);
             // 
@@ -157,11 +158,23 @@
             this.label5.TabIndex = 14;
             this.label5.Text = "Please,";
             // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button1.Location = new System.Drawing.Point(531, 247);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(132, 39);
+            this.button1.TabIndex = 15;
+            this.button1.Text = "Create room";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(692, 312);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.sendMessageButton);
@@ -196,6 +209,7 @@
         public System.Windows.Forms.ListBox serversListBox;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button button1;
     }
 }
 

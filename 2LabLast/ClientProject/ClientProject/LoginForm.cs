@@ -15,11 +15,11 @@ using Message = CommonLibrary.Messages;
 
 namespace ClientProject
 {
-    public partial class Form2 : Form
+    public partial class LoginForm : Form
     {
-        public Form1 mainForm;
+        public ChatForm mainForm;
 
-        public Form2()
+        public LoginForm()
         {
             InitializeComponent();
         }
@@ -42,7 +42,7 @@ namespace ClientProject
             string clientUsername = "";
             if (ClientUserNameCheck(ref clientUsername))
             {
-                Form1 Form1 = new Form1();
+                ChatForm Form1 = new ChatForm();
                 Form1.ClientUsername = clientUsername;
                 Form1.Owner = this;
                 disconnectButton.Visible = true;

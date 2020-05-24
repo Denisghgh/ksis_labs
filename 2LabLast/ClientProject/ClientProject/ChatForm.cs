@@ -7,7 +7,7 @@ using Messages = CommonLibrary.Messages;
 
 namespace ClientProject
 {
-    public partial class Form1 : Form
+    public partial class ChatForm : Form
     {
         public const int DefaultSelectedDialog = 0;
         private const string CommonChatName = "Common";
@@ -25,7 +25,7 @@ namespace ClientProject
             }
         }
 
-        public Form1()
+        public ChatForm()
         {
             selectedDialog = DefaultSelectedDialog;
             InitializeComponent();
@@ -331,6 +331,17 @@ namespace ClientProject
             chatTextBox.SelectionStart = chatTextBox.Text.Length;
             chatTextBox.ScrollToCaret();
             chatTextBox.Refresh();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var createRoomForm = new CreateRoomForm(client.participants.GetRange(1, client.participants.Count - 1));
+            createRoomForm.ShowDialog();
+            var roomParticipants = createRoomForm.RoomParticipants;
+            if (roomParticipants != null && roomParticipants.Count != 0)
+            {
+                // отправка сообщения серверу для регистрации комнаты
+            }
         }
     }
 }
