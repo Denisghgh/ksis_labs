@@ -18,9 +18,12 @@ namespace ClientProject
         public string RoomName { get; private set; }
         public int ClientId { get; }
 
+        private List<NewChatParticipant> tempChatParticipants { get; set; }
+
         public CreateRoomForm(List<NewChatParticipant> chatParticipants, int clientId)
         {
             InitializeComponent();
+            tempChatParticipants = new List<NewChatParticipant>();
             ClientId = clientId;
             ChatParticipants = chatParticipants;
             if (ChatParticipants != null && ChatParticipants.Count != 0)
@@ -30,6 +33,7 @@ namespace ClientProject
                     if (chatParticipant.Id != ClientId)
                     {
                         RoomParticipantsCheckedlistBox.Items.Add(chatParticipant.Name);
+                        tempChatParticipants.Add(chatParticipant);
                     }
                 }
             }
@@ -53,7 +57,7 @@ namespace ClientProject
             var indices = RoomParticipantsCheckedlistBox.CheckedIndices;
             foreach (int index in indices)
             {
-                RoomParticipantsIndecies.Add(index + 1);
+                RoomParticipantsIndecies.Add(tempChatParticipants[index].Id);
             }
             Close();
         }

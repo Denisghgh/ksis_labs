@@ -43,6 +43,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.roomsListBox = new System.Windows.Forms.ListBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.roomsParticipantsListBox = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // serversListBox
@@ -190,11 +192,31 @@
             this.label6.TabIndex = 17;
             this.label6.Text = "Rooms List:";
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label7.Location = new System.Drawing.Point(674, 133);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(180, 22);
+            this.label7.TabIndex = 19;
+            this.label7.Text = "Rooms Participants:";
+            // 
+            // roomsParticipantsListBox
+            // 
+            this.roomsParticipantsListBox.FormattingEnabled = true;
+            this.roomsParticipantsListBox.Location = new System.Drawing.Point(678, 157);
+            this.roomsParticipantsListBox.Name = "roomsParticipantsListBox";
+            this.roomsParticipantsListBox.Size = new System.Drawing.Size(131, 82);
+            this.roomsParticipantsListBox.TabIndex = 18;
+            // 
             // ChatForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(692, 312);
+            this.ClientSize = new System.Drawing.Size(848, 312);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.roomsParticipantsListBox);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.roomsListBox);
             this.Controls.Add(this.button1);
@@ -235,6 +257,8 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ListBox roomsListBox;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ListBox roomsParticipantsListBox;
     }
 }
 

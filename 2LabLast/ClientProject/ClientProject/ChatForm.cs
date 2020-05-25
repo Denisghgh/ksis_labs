@@ -268,8 +268,30 @@ namespace ClientProject
             }
         }
 
+        private void RefreshRoomParticipantsListBox()
+        {
+            roomsParticipantsListBox.Items.Clear();
+            var room = client.rooms[selectedRoom];
+            foreach (var participant in room.Participants)
+            {
+                roomsParticipantsListBox.Items.Add(participant);
+            }
+        }
+
+        private void HandleRoomParticipantsMessage(RoomParticipantsMessage message)
+        {
+            if (message.RoomId == selectedRoom)
+            {
+                RefreshRoomParticipantsListBox();
+            }
+        }
+
         public void ShowReceivedMessage(Messages message)
         {
+            if (message is RoomParticipantsMessage)
+            {
+                HandleRoomParticipantsMessage((RoomParticipantsMessage)message);
+            }
             if (message is CreateRoomResponseMessage)
             {
                 AddRoomToRoomsListBox((CreateRoomResponseMessage)message);
@@ -369,6 +391,7 @@ namespace ClientProject
             currentChatLabel.Text = room.RoomName;
             List<Messages> newMessages = room.MessageHistory;
             RefreshChatTextBox(newMessages);
+            RefreshRoomParticipantsListBox();
         }
 
         private void participantsListBox_SelectedIndexChanged(object sender, EventArgs e)

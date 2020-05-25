@@ -122,8 +122,18 @@ namespace ClientProject
             room.MessageHistory.Add(roomMessage);
         }
 
+        private void HandleRoomParticipantsMessage(RoomParticipantsMessage message)
+        {
+            var room = rooms[message.RoomId];
+            room.Participants = message.Participants;
+        }
+
         public void HandleReceivedMessage(Messages message)
         {
+            if (message is RoomParticipantsMessage)
+            {
+                HandleRoomParticipantsMessage((RoomParticipantsMessage)message);
+            }
             if (message is ServerUdpAnswerMessages)
             {
                 AddNewServerInfo((ServerUdpAnswerMessages)message);

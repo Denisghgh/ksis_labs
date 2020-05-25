@@ -240,6 +240,28 @@ namespace ServerProject
                     SendMessageToClient(createRoomResponseMessage, clientHandler);
                 }
             }
+            var roomParticipantsMessage = GetRoomParticipantsMessage(roomId);
+            foreach (var clientHandler in clients)
+            {
+                if (IsRoomParticipantClient(roomId, clientHandler.id))
+                {
+                    SendMessageToClient(roomParticipantsMessage, clientHandler);
+                }
+            }
+        }
+
+        private RoomParticipantsMessage GetRoomParticipantsMessage(int roomId)
+        {
+            var roomParticipants = new List<string>();
+            foreach (var clientHandler in clients)
+            {
+                if (IsRoomParticipantClient(roomId, clientHandler.id))
+                {
+                    roomParticipants.Add(clientHandler.name);
+                }
+            }
+            IPEndPoint serverIp = (IPEndPoint)(tcpSocket.LocalEndPoint);
+            return new RoomParticipantsMessage(DateTime.Now, serverIp.Address, serverIp.Port, roomParticipants, roomId);
         }
 
         private void HandleRoomMessage(RoomMessage roomMessage)
@@ -313,7 +335,7 @@ namespace ServerProject
         private CreateRoomResponseMessage GetCreateRoomResponseMessage(int roomId, string roomName)
         {
             IPEndPoint serverIp = (IPEndPoint)(tcpSocket.LocalEndPoint);
-            return new CreateRoomResponseMessage(DateTime.Now, serverIp.Address, serverIp.Port, new RoomInfo(roomName, roomId, new List<Messages>()));
+            return new CreateRoomResponseMessage(DateTime.Now, serverIp.Address, serverIp.Port, new RoomInfo(roomName, roomId, new List<Messages>(), new List<string>()));
         }
 
         private ServerUdpAnswerMessages GetServerUdpAnswerMessage() 
