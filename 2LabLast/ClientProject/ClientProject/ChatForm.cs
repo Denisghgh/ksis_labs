@@ -35,6 +35,7 @@ namespace ClientProject
             client.ReceiveMessageEvent += ShowReceivedMessage;
             client.UnreadMessageEvent += UnreadMessageHandler;
             client.ReadMessageEvent += ReadMessageHandler;
+            client.DeleteRoomEvent += HandleDeletedRoomUi;
             client.SearchServers();
             VisibleSettings(false);          
         }
@@ -270,11 +271,22 @@ namespace ClientProject
 
         private void RefreshRoomParticipantsListBox()
         {
-            roomsParticipantsListBox.Items.Clear();
-            var room = client.rooms[selectedRoom];
-            foreach (var participant in room.Participants)
+            Action action = delegate
             {
-                roomsParticipantsListBox.Items.Add(participant);
+                roomsParticipantsListBox.Items.Clear();
+                var room = client.rooms[selectedRoom];
+                foreach (var participant in room.Participants)
+                {
+                    roomsParticipantsListBox.Items.Add(participant);
+                }
+            };
+            if (InvokeRequired)
+            {
+                Invoke(action);
+            }
+            else
+            {
+                action();
             }
         }
 
@@ -438,6 +450,19 @@ namespace ClientProject
             {
                 ChangeDialog(roomsListBox.SelectedIndex);
             }
+        }
+
+        private void HandleDeletedRoomUi(int roomId)
+        {
+            selectedRoom = -1;
+            roomsListBox.SelectedIndex = -1;
+            roomsListBox.Items.RemoveAt(roomId);
+            roomsParticipantsListBox.Items.Clear();
+        }
+
+        private void exitRoomButton_Click(object sender, EventArgs e)
+        {
+            client.SendExitRoomMessage(selectedRoom);
         }
     }
 }

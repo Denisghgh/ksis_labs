@@ -45,6 +45,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.roomsParticipantsListBox = new System.Windows.Forms.ListBox();
+            this.inviteRoomButton = new System.Windows.Forms.Button();
+            this.exitRoomButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // serversListBox
@@ -196,7 +198,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label7.Location = new System.Drawing.Point(674, 133);
+            this.label7.Location = new System.Drawing.Point(676, 17);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(180, 22);
             this.label7.TabIndex = 19;
@@ -205,16 +207,39 @@
             // roomsParticipantsListBox
             // 
             this.roomsParticipantsListBox.FormattingEnabled = true;
-            this.roomsParticipantsListBox.Location = new System.Drawing.Point(678, 157);
+            this.roomsParticipantsListBox.Location = new System.Drawing.Point(680, 41);
             this.roomsParticipantsListBox.Name = "roomsParticipantsListBox";
             this.roomsParticipantsListBox.Size = new System.Drawing.Size(131, 82);
             this.roomsParticipantsListBox.TabIndex = 18;
+            // 
+            // inviteRoomButton
+            // 
+            this.inviteRoomButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.inviteRoomButton.Location = new System.Drawing.Point(679, 129);
+            this.inviteRoomButton.Name = "inviteRoomButton";
+            this.inviteRoomButton.Size = new System.Drawing.Size(132, 39);
+            this.inviteRoomButton.TabIndex = 20;
+            this.inviteRoomButton.Text = "Invite";
+            this.inviteRoomButton.UseVisualStyleBackColor = true;
+            // 
+            // exitRoomButton
+            // 
+            this.exitRoomButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.exitRoomButton.Location = new System.Drawing.Point(679, 169);
+            this.exitRoomButton.Name = "exitRoomButton";
+            this.exitRoomButton.Size = new System.Drawing.Size(132, 39);
+            this.exitRoomButton.TabIndex = 21;
+            this.exitRoomButton.Text = "Exit";
+            this.exitRoomButton.UseVisualStyleBackColor = true;
+            this.exitRoomButton.Click += new System.EventHandler(this.exitRoomButton_Click);
             // 
             // ChatForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(848, 312);
+            this.Controls.Add(this.exitRoomButton);
+            this.Controls.Add(this.inviteRoomButton);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.roomsParticipantsListBox);
             this.Controls.Add(this.label6);
@@ -259,6 +284,8 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ListBox roomsParticipantsListBox;
+        private System.Windows.Forms.Button inviteRoomButton;
+        private System.Windows.Forms.Button exitRoomButton;
     }
 }
 

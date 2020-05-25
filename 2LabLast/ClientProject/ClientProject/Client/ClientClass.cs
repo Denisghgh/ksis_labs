@@ -10,22 +10,27 @@ using System.Threading;
 namespace ClientProject
 {
     public delegate void ReceiveMessage(Messages message);
+    public delegate void DeleteRoomDelegate(int roomId);
 
     public class ClientClass
     {
         private const int ServerPort = 8088;
         public int id;
+
         private List<ServerInfo> serversInfo;
         public List<NewChatParticipant> participants;
         public List<RoomInfo> rooms;
+
         private Socket tcpSocket;
         private Socket udpSocket;
         private Thread listenUdpThread;
         private Thread listenTcpThread;
         private IMessagesSerializer messageSerializer;
+
         public event ReceiveMessage ReceiveMessageEvent;
         public event NotReadedMessageCountDelegate UnreadMessageEvent;
         public event ReadMessageDelegate ReadMessageEvent;
+        public event DeleteRoomDelegate DeleteRoomEvent;
 
         public ClientClass(IMessagesSerializer messageSerializer)
         {
@@ -257,7 +262,7 @@ namespace ClientProject
         public void SendRoomMessage(string content, int selectedRoom)
         {
             var roomMessage = GetRoomMessage(content, selectedRoom);
-            tcpSocket.Send(messageSerializer.Serialize(roomMessage));
+            SendMessage(roomMessage);
         }
 
         public void SendMessage(Messages message)
@@ -268,7 +273,15 @@ namespace ClientProject
         public void SendCreateRoomRequestMessage(string roomName, List<int> roomParticipantsIndecies)
         {
             var createRoomRequestMessage = GetCreateRoomRequestMessage(roomName, roomParticipantsIndecies);
-            tcpSocket.Send(messageSerializer.Serialize(createRoomRequestMessage));
+            SendMessage(createRoomRequestMessage);
+        }
+
+        public void SendExitRoomMessage(int roomId)
+        {
+            var exitRoomMessage = GetExitRoomMessage(roomId);
+            SendMessage(exitRoomMessage);
+            rooms.RemoveAt(roomId);
+            DeleteRoomEvent(roomId);
         }
 
         public void Close()
@@ -277,6 +290,12 @@ namespace ClientProject
             FunctionsCommon.CloseAndNullSocket(ref udpSocket);
             FunctionsCommon.CloseAndNullThread(ref listenTcpThread);
             FunctionsCommon.CloseAndNullThread(ref listenUdpThread);
+        }
+
+        private ExitRoomMessage GetExitRoomMessage(int roomId)
+        {
+            IPEndPoint clientIp = (IPEndPoint)(tcpSocket.LocalEndPoint);
+            return new ExitRoomMessage(DateTime.Now, clientIp.Address, clientIp.Port, roomId, id);
         }
 
         private RoomMessage GetRoomMessage(string content, int selectedRoom)

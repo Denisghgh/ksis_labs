@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Messages\CreateRoomRequestMessage.cs" />
     <Compile Include="Messages\CreateRoomResponseMessage.cs" />
+    <Compile Include="Messages\ExitRoomMessage.cs" />
     <Compile Include="Messages\GetRoomsParticipantsMessage.cs" />
     <Compile Include="Messages\RoomMessage.cs" />
     <Compile Include="NewChatParticipant.cs" />

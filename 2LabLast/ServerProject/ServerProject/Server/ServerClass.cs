@@ -275,8 +275,31 @@ namespace ServerProject
             }
         }
 
+        private void HandleExitRoomMessage(ExitRoomMessage message)
+        {
+            var room = rooms[message.RoomId];
+            room.RoomParticipants.Remove(message.ClientId);
+            var roomParticipantsMessage = GetRoomParticipantsMessage(message.RoomId);
+            foreach (var clientHandler in clients)
+            {
+                if (IsRoomParticipantClient(message.RoomId, clientHandler.id))
+                {
+                    SendMessageToClient(roomParticipantsMessage, clientHandler);
+                }
+            }
+            if (room.RoomParticipants.Count == 0)
+            {
+                rooms.Remove(room);
+            }
+        }
+
         public void HandleReceivedMessage(Messages message)
         {
+            if (message is ExitRoomMessage)
+            {
+                ExitRoomMessage exitRoomMessage = (ExitRoomMessage)message;
+                HandleExitRoomMessage(exitRoomMessage);
+            }
             if (message is ClientUdpRequestMessages)
             {
                 ClientUdpRequestMessages clientUdpRequestMessage = (ClientUdpRequestMessages)message;               
