@@ -396,7 +396,7 @@ namespace ClientProject
 
         private void CreateRoomButton_Click(object sender, EventArgs e)
         {
-            var createRoomForm = new CreateRoomForm(client.participants.GetRange(1, client.participants.Count - 1));
+            var createRoomForm = new CreateRoomForm(client.participants.GetRange(1, client.participants.Count - 1), client.id);
             createRoomForm.ShowDialog();
             var roomParticipantsIndecies = createRoomForm.RoomParticipantsIndecies;
             var roomName = createRoomForm.RoomName;
