@@ -221,6 +221,7 @@
             this.inviteRoomButton.TabIndex = 20;
             this.inviteRoomButton.Text = "Invite";
             this.inviteRoomButton.UseVisualStyleBackColor = true;
+            this.inviteRoomButton.Click += new System.EventHandler(this.inviteRoomButton_Click);
             // 
             // exitRoomButton
             // 

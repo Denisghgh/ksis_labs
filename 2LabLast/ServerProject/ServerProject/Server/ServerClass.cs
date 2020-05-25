@@ -293,8 +293,41 @@ namespace ServerProject
             }
         }
 
+        private void HandleInviteRoomMessage(InviteRoomMessage message)
+        {
+            var room = rooms[message.RoomId];
+            var roomParticipants = room.RoomParticipants;
+            foreach (var newParticipant in message.RoomParticipantsIndecies)
+            {
+                roomParticipants.Add(newParticipant);
+            }
+            var roomId = rooms.IndexOf(room);
+            var roomName = room.RoomName;
+            var createRoomResponseMessage = GetCreateRoomResponseMessage(roomId, roomName);
+            foreach (var clientHandler in clients)
+            {
+                if (IsRoomParticipantClient(roomId, clientHandler.id) && message.RoomParticipantsIndecies.Contains(clientHandler.id))
+                {
+                    SendMessageToClient(createRoomResponseMessage, clientHandler);
+                }
+            }
+            var roomParticipantsMessage = GetRoomParticipantsMessage(message.RoomId);
+            foreach (var clientHandler in clients)
+            {
+                if (IsRoomParticipantClient(message.RoomId, clientHandler.id))
+                {
+                    SendMessageToClient(roomParticipantsMessage, clientHandler);
+                }
+            }
+        }
+
         public void HandleReceivedMessage(Messages message)
         {
+            if (message is InviteRoomMessage)
+            {
+                InviteRoomMessage inviteRoomMessage = (InviteRoomMessage)message;
+                HandleInviteRoomMessage(inviteRoomMessage);
+            }
             if (message is ExitRoomMessage)
             {
                 ExitRoomMessage exitRoomMessage = (ExitRoomMessage)message;

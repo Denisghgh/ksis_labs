@@ -45,6 +45,7 @@
     <Compile Include="Messages\CreateRoomResponseMessage.cs" />
     <Compile Include="Messages\ExitRoomMessage.cs" />
     <Compile Include="Messages\GetRoomsParticipantsMessage.cs" />
+    <Compile Include="Messages\InviteRoomMessage.cs" />
     <Compile Include="Messages\RoomMessage.cs" />
     <Compile Include="NewChatParticipant.cs" />
     <Compile Include="Messages\ClientUdpRequestMessages.cs" />

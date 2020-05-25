@@ -464,5 +464,19 @@ namespace ClientProject
         {
             client.SendExitRoomMessage(selectedRoom);
         }
+
+        private void inviteRoomButton_Click(object sender, EventArgs e)
+        {
+            if (selectedRoom > -1)
+            {
+                var inviteRoomForm = new InviteRoomForm(client.participants.GetRange(1, client.participants.Count - 1), client.rooms[selectedRoom].Participants, client.id);
+                inviteRoomForm.ShowDialog();
+                var roomParticipantsIndecies = inviteRoomForm.RoomParticipantsIndecies;
+                if (roomParticipantsIndecies != null && roomParticipantsIndecies.Count != 0)
+                {
+                    client.SendInviteRoomMessage(selectedRoom, roomParticipantsIndecies);
+                }
+            }
+        }
     }
 }

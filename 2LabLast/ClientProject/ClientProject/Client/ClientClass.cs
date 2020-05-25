@@ -241,6 +241,12 @@ namespace ClientProject
             listenUdpThread.Start();
         }
 
+        public void SendInviteRoomMessage(int selectedRoom, List<int> roomParticipantsIndecies)
+        {
+            var inviteRoomMessage = GetInviteRoomMessage(selectedRoom, roomParticipantsIndecies);
+            SendMessage(inviteRoomMessage);
+        }
+
         public void SendMessage(string content, int selectedDialog)
         {
             if (participants[selectedDialog].Id == 0)
@@ -290,6 +296,12 @@ namespace ClientProject
             FunctionsCommon.CloseAndNullSocket(ref udpSocket);
             FunctionsCommon.CloseAndNullThread(ref listenTcpThread);
             FunctionsCommon.CloseAndNullThread(ref listenUdpThread);
+        }
+
+        private InviteRoomMessage GetInviteRoomMessage(int roomId, List<int> participantsIndecies)
+        {
+            IPEndPoint clientIp = (IPEndPoint)(tcpSocket.LocalEndPoint);
+            return new InviteRoomMessage(DateTime.Now, clientIp.Address, clientIp.Port, participantsIndecies, roomId);
         }
 
         private ExitRoomMessage GetExitRoomMessage(int roomId)
