@@ -53,23 +53,27 @@
             this.FilesToLoadListBox = new System.Windows.Forms.ListBox();
             this.DeleteFileButton = new System.Windows.Forms.Button();
             this.ChatListBox = new System.Windows.Forms.ListBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.AvatarPictureBox = new System.Windows.Forms.PictureBox();
+            this.label10 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.AvatarPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // serversListBox
             // 
             this.serversListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.serversListBox.FormattingEnabled = true;
-            this.serversListBox.Location = new System.Drawing.Point(9, 129);
+            this.serversListBox.Location = new System.Drawing.Point(3, 237);
             this.serversListBox.Name = "serversListBox";
-            this.serversListBox.Size = new System.Drawing.Size(131, 69);
+            this.serversListBox.Size = new System.Drawing.Size(144, 69);
             this.serversListBox.TabIndex = 0;
             // 
             // connectButton
             // 
             this.connectButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.connectButton.Location = new System.Drawing.Point(9, 204);
+            this.connectButton.Location = new System.Drawing.Point(3, 312);
             this.connectButton.Name = "connectButton";
-            this.connectButton.Size = new System.Drawing.Size(131, 82);
+            this.connectButton.Size = new System.Drawing.Size(145, 81);
             this.connectButton.TabIndex = 2;
             this.connectButton.Text = "Connect";
             this.connectButton.UseVisualStyleBackColor = true;
@@ -79,7 +83,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(187, 16);
+            this.label1.Location = new System.Drawing.Point(352, 10);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(147, 24);
             this.label1.TabIndex = 3;
@@ -89,7 +93,7 @@
             // 
             this.currentChatLabel.AutoSize = true;
             this.currentChatLabel.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.currentChatLabel.Location = new System.Drawing.Point(340, 16);
+            this.currentChatLabel.Location = new System.Drawing.Point(505, 10);
             this.currentChatLabel.Name = "currentChatLabel";
             this.currentChatLabel.Size = new System.Drawing.Size(88, 24);
             this.currentChatLabel.TabIndex = 4;
@@ -99,7 +103,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(528, 16);
+            this.label2.Location = new System.Drawing.Point(149, 10);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(148, 22);
             this.label2.TabIndex = 6;
@@ -108,16 +112,16 @@
             // participantsListBox
             // 
             this.participantsListBox.FormattingEnabled = true;
-            this.participantsListBox.Location = new System.Drawing.Point(532, 48);
+            this.participantsListBox.Location = new System.Drawing.Point(151, 37);
             this.participantsListBox.Name = "participantsListBox";
-            this.participantsListBox.Size = new System.Drawing.Size(131, 82);
+            this.participantsListBox.Size = new System.Drawing.Size(144, 134);
             this.participantsListBox.TabIndex = 7;
             this.participantsListBox.SelectedIndexChanged += new System.EventHandler(this.participantsListBox_SelectedIndexChanged);
             // 
             // label3
             // 
             this.label3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(10, 102);
+            this.label3.Location = new System.Drawing.Point(5, 187);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(130, 96);
             this.label3.TabIndex = 8;
@@ -125,7 +129,7 @@
             // 
             // messageTextBox
             // 
-            this.messageTextBox.Location = new System.Drawing.Point(145, 219);
+            this.messageTextBox.Location = new System.Drawing.Point(310, 213);
             this.messageTextBox.Name = "messageTextBox";
             this.messageTextBox.Size = new System.Drawing.Size(380, 20);
             this.messageTextBox.TabIndex = 9;
@@ -133,7 +137,7 @@
             // sendMessageButton
             // 
             this.sendMessageButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sendMessageButton.Location = new System.Drawing.Point(145, 247);
+            this.sendMessageButton.Location = new System.Drawing.Point(310, 241);
             this.sendMessageButton.Name = "sendMessageButton";
             this.sendMessageButton.Size = new System.Drawing.Size(380, 39);
             this.sendMessageButton.TabIndex = 10;
@@ -144,7 +148,7 @@
             // label4
             // 
             this.label4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(12, 21);
+            this.label4.Location = new System.Drawing.Point(7, 110);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(128, 81);
             this.label4.TabIndex = 13;
@@ -154,7 +158,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(10, 84);
+            this.label5.Location = new System.Drawing.Point(7, 170);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(61, 18);
             this.label5.TabIndex = 14;
@@ -163,9 +167,9 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(531, 247);
+            this.button1.Location = new System.Drawing.Point(696, 216);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(132, 39);
+            this.button1.Size = new System.Drawing.Size(153, 65);
             this.button1.TabIndex = 15;
             this.button1.Text = "Create room";
             this.button1.UseVisualStyleBackColor = true;
@@ -174,7 +178,7 @@
             // roomsListBox
             // 
             this.roomsListBox.FormattingEnabled = true;
-            this.roomsListBox.Location = new System.Drawing.Point(532, 157);
+            this.roomsListBox.Location = new System.Drawing.Point(870, 37);
             this.roomsListBox.Name = "roomsListBox";
             this.roomsListBox.Size = new System.Drawing.Size(131, 82);
             this.roomsListBox.TabIndex = 16;
@@ -184,7 +188,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.Location = new System.Drawing.Point(528, 133);
+            this.label6.Location = new System.Drawing.Point(880, 16);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(112, 22);
             this.label6.TabIndex = 17;
@@ -193,27 +197,28 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label7.Location = new System.Drawing.Point(676, 17);
+            this.label7.Font = new System.Drawing.Font("Arial", 12F);
+            this.label7.Location = new System.Drawing.Point(867, 122);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(180, 22);
+            this.label7.Size = new System.Drawing.Size(149, 18);
             this.label7.TabIndex = 19;
             this.label7.Text = "Rooms Participants:";
             // 
             // roomsParticipantsListBox
             // 
             this.roomsParticipantsListBox.FormattingEnabled = true;
-            this.roomsParticipantsListBox.Location = new System.Drawing.Point(680, 41);
+            this.roomsParticipantsListBox.Location = new System.Drawing.Point(870, 140);
             this.roomsParticipantsListBox.Name = "roomsParticipantsListBox";
             this.roomsParticipantsListBox.Size = new System.Drawing.Size(131, 82);
             this.roomsParticipantsListBox.TabIndex = 18;
+            this.roomsParticipantsListBox.SelectedIndexChanged += new System.EventHandler(this.roomsParticipantsListBox_SelectedIndexChanged);
             // 
             // inviteRoomButton
             // 
             this.inviteRoomButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.inviteRoomButton.Location = new System.Drawing.Point(679, 129);
+            this.inviteRoomButton.Location = new System.Drawing.Point(870, 228);
             this.inviteRoomButton.Name = "inviteRoomButton";
-            this.inviteRoomButton.Size = new System.Drawing.Size(132, 39);
+            this.inviteRoomButton.Size = new System.Drawing.Size(132, 24);
             this.inviteRoomButton.TabIndex = 20;
             this.inviteRoomButton.Text = "Invite";
             this.inviteRoomButton.UseVisualStyleBackColor = true;
@@ -222,9 +227,9 @@
             // exitRoomButton
             // 
             this.exitRoomButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.exitRoomButton.Location = new System.Drawing.Point(679, 169);
+            this.exitRoomButton.Location = new System.Drawing.Point(869, 256);
             this.exitRoomButton.Name = "exitRoomButton";
-            this.exitRoomButton.Size = new System.Drawing.Size(132, 39);
+            this.exitRoomButton.Size = new System.Drawing.Size(132, 25);
             this.exitRoomButton.TabIndex = 21;
             this.exitRoomButton.Text = "Exit";
             this.exitRoomButton.UseVisualStyleBackColor = true;
@@ -233,17 +238,17 @@
             // AvaibleFilesListBox
             // 
             this.AvaibleFilesListBox.FormattingEnabled = true;
-            this.AvaibleFilesListBox.Location = new System.Drawing.Point(865, 48);
+            this.AvaibleFilesListBox.Location = new System.Drawing.Point(696, 37);
             this.AvaibleFilesListBox.Name = "AvaibleFilesListBox";
-            this.AvaibleFilesListBox.Size = new System.Drawing.Size(160, 212);
+            this.AvaibleFilesListBox.Size = new System.Drawing.Size(153, 134);
             this.AvaibleFilesListBox.TabIndex = 27;
             // 
             // DownloadFileButton
             // 
             this.DownloadFileButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DownloadFileButton.Location = new System.Drawing.Point(865, 262);
+            this.DownloadFileButton.Location = new System.Drawing.Point(696, 176);
             this.DownloadFileButton.Name = "DownloadFileButton";
-            this.DownloadFileButton.Size = new System.Drawing.Size(160, 24);
+            this.DownloadFileButton.Size = new System.Drawing.Size(153, 24);
             this.DownloadFileButton.TabIndex = 26;
             this.DownloadFileButton.Text = "Download file";
             this.DownloadFileButton.UseVisualStyleBackColor = true;
@@ -253,18 +258,18 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(861, 17);
+            this.label8.Location = new System.Drawing.Point(706, 15);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(137, 24);
+            this.label8.Size = new System.Drawing.Size(105, 24);
             this.label8.TabIndex = 25;
-            this.label8.Text = "Message Files:";
+            this.label8.Text = "Send Files:";
             // 
             // AddFileButton
             // 
             this.AddFileButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddFileButton.Location = new System.Drawing.Point(679, 236);
+            this.AddFileButton.Location = new System.Drawing.Point(151, 228);
             this.AddFileButton.Name = "AddFileButton";
-            this.AddFileButton.Size = new System.Drawing.Size(162, 24);
+            this.AddFileButton.Size = new System.Drawing.Size(145, 24);
             this.AddFileButton.TabIndex = 24;
             this.AddFileButton.Text = "Add file";
             this.AddFileButton.UseVisualStyleBackColor = true;
@@ -276,18 +281,18 @@
             this.FilesToLoadListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FilesToLoadListBox.FormattingEnabled = true;
             this.FilesToLoadListBox.ItemHeight = 15;
-            this.FilesToLoadListBox.Location = new System.Drawing.Point(679, 215);
+            this.FilesToLoadListBox.Location = new System.Drawing.Point(151, 203);
             this.FilesToLoadListBox.Name = "FilesToLoadListBox";
             this.FilesToLoadListBox.ScrollAlwaysVisible = true;
-            this.FilesToLoadListBox.Size = new System.Drawing.Size(162, 19);
+            this.FilesToLoadListBox.Size = new System.Drawing.Size(145, 19);
             this.FilesToLoadListBox.TabIndex = 23;
             // 
             // DeleteFileButton
             // 
             this.DeleteFileButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DeleteFileButton.Location = new System.Drawing.Point(679, 257);
+            this.DeleteFileButton.Location = new System.Drawing.Point(151, 256);
             this.DeleteFileButton.Name = "DeleteFileButton";
-            this.DeleteFileButton.Size = new System.Drawing.Size(162, 24);
+            this.DeleteFileButton.Size = new System.Drawing.Size(145, 24);
             this.DeleteFileButton.TabIndex = 22;
             this.DeleteFileButton.Text = "Delete file";
             this.DeleteFileButton.UseVisualStyleBackColor = true;
@@ -296,17 +301,50 @@
             // ChatListBox
             // 
             this.ChatListBox.FormattingEnabled = true;
-            this.ChatListBox.Location = new System.Drawing.Point(145, 43);
+            this.ChatListBox.Location = new System.Drawing.Point(310, 37);
             this.ChatListBox.Name = "ChatListBox";
             this.ChatListBox.Size = new System.Drawing.Size(380, 173);
             this.ChatListBox.TabIndex = 28;
             this.ChatListBox.SelectedIndexChanged += new System.EventHandler(this.ChatListBox_SelectedIndexChanged);
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Arial", 12F);
+            this.label9.Location = new System.Drawing.Point(157, 182);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(135, 18);
+            this.label9.TabIndex = 29;
+            this.label9.Text = "Select file to send:";
+            // 
+            // AvatarPictureBox
+            // 
+            this.AvatarPictureBox.Location = new System.Drawing.Point(3, 10);
+            this.AvatarPictureBox.Name = "AvatarPictureBox";
+            this.AvatarPictureBox.Size = new System.Drawing.Size(142, 97);
+            this.AvatarPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.AvatarPictureBox.TabIndex = 30;
+            this.AvatarPictureBox.TabStop = false;
+            this.AvatarPictureBox.Click += new System.EventHandler(this.AvatarPictureBox_Click);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(34, 4);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(74, 13);
+            this.label10.TabIndex = 31;
+            this.label10.Text = "Upload avatar";
+            this.label10.Click += new System.EventHandler(this.label10_Click);
+            // 
             // ChatForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1043, 331);
+            this.ClientSize = new System.Drawing.Size(151, 405);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.AvatarPictureBox);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.ChatListBox);
             this.Controls.Add(this.AvaibleFilesListBox);
             this.Controls.Add(this.DownloadFileButton);
@@ -336,6 +374,7 @@
             this.Text = "Chat";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.AvatarPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -367,6 +406,9 @@
         private System.Windows.Forms.ListBox FilesToLoadListBox;
         private System.Windows.Forms.Button DeleteFileButton;
         private System.Windows.Forms.ListBox ChatListBox;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.PictureBox AvatarPictureBox;
+        private System.Windows.Forms.Label label10;
     }
 }
 

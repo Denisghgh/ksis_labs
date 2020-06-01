@@ -43,3 +43,9 @@ C:\Users\Denizka\DenisFolder\KSiS\NotMein\10\ksis_labs\2LabLast\CommonLibrary\ob
 C:\Users\Denizka\DenisFolder\KSiS\NotMein\10\ksis_labs\2LabLast\CommonLibrary\obj\Debug\CommonLibrary.dll
 C:\Users\Denizka\DenisFolder\KSiS\NotMein\10\ksis_labs\2LabLast\CommonLibrary\obj\Debug\CommonLibrary.pdb
 C:\Users\Denizka\DenisFolder\KSiS\NotMein\10\ksis_labs\2LabLast\CommonLibrary\obj\Debug\CommonLibrary.csprojAssemblyReference.cache
+C:\Users\Denizka\Documents\GitHub\ksis\2LabLast\CommonLibrary\bin\Debug\CommonLibrary.dll
+C:\Users\Denizka\Documents\GitHub\ksis\2LabLast\CommonLibrary\bin\Debug\CommonLibrary.pdb
+C:\Users\Denizka\Documents\GitHub\ksis\2LabLast\CommonLibrary\obj\Debug\CommonLibrary.csproj.CoreCompileInputs.cache
+C:\Users\Denizka\Documents\GitHub\ksis\2LabLast\CommonLibrary\obj\Debug\CommonLibrary.dll
+C:\Users\Denizka\Documents\GitHub\ksis\2LabLast\CommonLibrary\obj\Debug\CommonLibrary.pdb
+C:\Users\Denizka\Documents\GitHub\ksis\2LabLast\CommonLibrary\obj\Debug\CommonLibrary.csprojAssemblyReference.cache

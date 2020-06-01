@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Denizka\\DenisFolder\\KSiS\\NotMein\\10\\ksis_labs\\2LabLast\\FileSharingLibrary\\ShareFilesLibrary.csproj": {}
+    "C:\\Users\\Denizka\\Documents\\GitHub\\ksis\\2LabLast\\FileSharingLibrary\\ShareFilesLibrary.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Denizka\\DenisFolder\\KSiS\\NotMein\\10\\ksis_labs\\2LabLast\\FileSharingLibrary\\ShareFilesLibrary.csproj": {
+    "C:\\Users\\Denizka\\Documents\\GitHub\\ksis\\2LabLast\\FileSharingLibrary\\ShareFilesLibrary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Denizka\\DenisFolder\\KSiS\\NotMein\\10\\ksis_labs\\2LabLast\\FileSharingLibrary\\ShareFilesLibrary.csproj",
+        "projectUniqueName": "C:\\Users\\Denizka\\Documents\\GitHub\\ksis\\2LabLast\\FileSharingLibrary\\ShareFilesLibrary.csproj",
         "projectName": "ShareFilesLibrary",
-        "projectPath": "C:\\Users\\Denizka\\DenisFolder\\KSiS\\NotMein\\10\\ksis_labs\\2LabLast\\FileSharingLibrary\\ShareFilesLibrary.csproj",
+        "projectPath": "C:\\Users\\Denizka\\Documents\\GitHub\\ksis\\2LabLast\\FileSharingLibrary\\ShareFilesLibrary.csproj",
         "packagesPath": "C:\\Users\\Denizka\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Denizka\\DenisFolder\\KSiS\\NotMein\\10\\ksis_labs\\2LabLast\\FileSharingLibrary\\obj\\",
+        "outputPath": "C:\\Users\\Denizka\\Documents\\GitHub\\ksis\\2LabLast\\FileSharingLibrary\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

@@ -1,11 +1,15 @@
-﻿using CommonLibrary;
+﻿using ClientProject.Properties;
+using CommonLibrary;
 using FileSharingLibrary;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.IO;
-using System.Net.Http.Headers;
 using System.Windows.Forms;
 using Messages = CommonLibrary.Messages;
+using System.Drawing;
+
+
 
 namespace ClientProject
 {
@@ -15,6 +19,7 @@ namespace ClientProject
         private const string CommonChatName = "Common";
         private const int CommonChatId = 0;
         private const string FileSharingServerUrl = "http://localhost:8888/";
+        public static String avatarName = "Default";
 
         public ClientClass client;
         public FileSharingClient fileSharingClient;
@@ -26,9 +31,11 @@ namespace ClientProject
         {
             get { return clientUsername; }
             set
-            { 
+            {
                 clientUsername = value;
                 label4.Text = label4.Text + " " + clientUsername;
+                AvatarPictureBox.Image = new Bitmap(GetImageBinaryFromDb());
+                CheckAvatarPictureBoxInDB(false);
             }
         }
 
@@ -387,6 +394,7 @@ namespace ClientProject
         }
         private void connectButton_Click(object sender, EventArgs e)
         {
+            ActiveForm.Width = 1040;
             Connect();         
         }
         private void sendMessageButton_Click(object sender, EventArgs e)
@@ -645,6 +653,129 @@ namespace ClientProject
             {
                 ShowFiles(files);
             }
+        }
+
+        private void roomsParticipantsListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        public void AddAvatarPhoto()
+        {
+            OpenFileDialog opf = new OpenFileDialog();
+            opf.Filter = "Image Files(*.JPG;*.PNG;*.GIF|*.JPG;*.PNG;*.GIF|All files (*.*)|*.*)";
+
+            if (opf.ShowDialog() == DialogResult.OK)
+            {
+
+                PutImageBinaryInDb(opf.FileName);
+                Image PassAvatarPhoto = GetImageBinaryFromDb();
+                AvatarPictureBox.Image = new Bitmap(opf.FileName);
+            }
+        }
+        private void PutImageBinaryInDb(string iFile)
+        {
+            string iAvatarName = avatarName;
+            byte[] imageData = null;
+            System.IO.FileInfo fInfo = new System.IO.FileInfo(iFile);
+            long numBytes = fInfo.Length;
+            FileStream fStream = new FileStream(iFile, FileMode.Open, FileAccess.Read);
+            BinaryReader br = new BinaryReader(fStream);
+            imageData = br.ReadBytes((int)numBytes);
+
+            string iImageExtension = (Path.GetExtension(iFile)).Replace(".", "").ToLower();
+            
+            using (SqlConnection sqlConnection = new SqlConnection(Settings.Default.DBMAINN))
+            {
+                string commandText = "INSERT INTO report (avatar_name, screen, screen_format) VALUES(@avatar_name, @screen, @screen_format)";
+                SqlCommand command = new SqlCommand(commandText, sqlConnection);
+                command.Parameters.AddWithValue("@avatar_name", iAvatarName);
+                command.Parameters.AddWithValue("@screen", (object)imageData);
+                command.Parameters.AddWithValue("@screen_format", iImageExtension);
+                sqlConnection.Open();
+                command.ExecuteNonQuery();
+                sqlConnection.Close();
+            }
+        }
+
+        private Image GetImageBinaryFromDb()
+        {
+            List<byte[]> iScreen = new List<byte[]>();
+            List<string> iScreen_format = new List<string>();
+            List<string> iAvatar_Name = new List<string>();
+
+            using (SqlConnection sqlConnection = new SqlConnection(Settings.Default.DBMAINN))
+            {
+                sqlConnection.Open();
+                SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
+                sqlCommand.CommandText = @"SELECT [avatar_name], [screen], [screen_format] FROM [report] WHERE [avatar_name] = '" + avatarName + "'";
+                SqlDataReader sqlReader = sqlCommand.ExecuteReader();
+                byte[] iTrimByte = null;
+                string iTrimText = null;
+                string iTrimName = null;
+                while (sqlReader.Read())
+                {
+                    iTrimByte = (byte[])sqlReader["screen"];
+                    iScreen.Add(iTrimByte);
+                    iTrimText = sqlReader["screen_format"].ToString().TrimStart().TrimEnd();
+                    iScreen_format.Add(iTrimText);
+                    iTrimName = sqlReader["avatar_name"].ToString();
+                    iAvatar_Name.Add(iTrimName);
+                }
+                sqlConnection.Close();
+            }
+            byte[] imageData = iScreen[0];
+            MemoryStream ms = new MemoryStream(imageData);
+            Image newImage = Image.FromStream(ms);
+            return newImage;
+        }
+
+        public void CheckAvatarPictureBoxInDB(bool NeedChangepic)
+        {
+            using (SqlConnection sqlConnection = new SqlConnection(Settings.Default.DBMAINN))
+            {
+                sqlConnection.Open();
+                SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
+                avatarName = clientUsername;
+                sqlCommand.CommandText = @"SELECT count(*) from [report] where [avatar_name] = '" + avatarName + "'";
+                int temp = Convert.ToInt16(sqlCommand.ExecuteScalar());
+                if (temp >= 1)
+                {
+                    Image PassAvatarPhoto = GetImageBinaryFromDb();
+                    AvatarPictureBox.Image = new Bitmap(PassAvatarPhoto);
+                }
+                else if (temp == 0 && NeedChangepic)
+                {
+                    AddAvatarPhoto();
+                }
+                sqlConnection.Close();
+            }
+        }
+        public void DeleteRow1(string AvatarName)
+        {
+            using (SqlConnection sqlConnection = new SqlConnection(Settings.Default.DBMAINN))
+            {
+                sqlConnection.Open();
+                SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
+                sqlCommand.CommandText = "DELETE FROM report WHERE avatar_name = @AvatarName";
+                sqlCommand.Parameters.AddWithValue("@AvatarName", AvatarName);
+                sqlCommand.ExecuteNonQuery();
+                sqlConnection.Close();
+            }
+
+        }
+        private void AvatarPictureBox_Click(object sender, EventArgs e)
+        {
+            CheckAvatarPictureBoxInDB(true);
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+            DeleteRow1(clientUsername);
+            AddAvatarPhoto();
         }
     }
 }

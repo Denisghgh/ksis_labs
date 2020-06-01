@@ -90,3 +90,15 @@ C:\Users\Denizka\DenisFolder\KSiS\NotMein\10\ksis_labs\2LabLast\ServerProject\Se
 C:\Users\Denizka\DenisFolder\KSiS\NotMein\10\ksis_labs\2LabLast\ServerProject\ServerProject\obj\Debug\ServerProject.pdb
 C:\Users\Denizka\DenisFolder\KSiS\NotMein\10\ksis_labs\2LabLast\ServerProject\ServerProject\bin\Debug\ShareFilesLibrary.dll
 C:\Users\Denizka\DenisFolder\KSiS\NotMein\10\ksis_labs\2LabLast\ServerProject\ServerProject\bin\Debug\ShareFilesLibrary.pdb
+C:\Users\Denizka\Documents\GitHub\ksis\2LabLast\ServerProject\ServerProject\bin\Debug\ServerProject.exe.config
+C:\Users\Denizka\Documents\GitHub\ksis\2LabLast\ServerProject\ServerProject\bin\Debug\ServerProject.exe
+C:\Users\Denizka\Documents\GitHub\ksis\2LabLast\ServerProject\ServerProject\bin\Debug\ServerProject.pdb
+C:\Users\Denizka\Documents\GitHub\ksis\2LabLast\ServerProject\ServerProject\bin\Debug\CommonLibrary.dll
+C:\Users\Denizka\Documents\GitHub\ksis\2LabLast\ServerProject\ServerProject\bin\Debug\ShareFilesLibrary.dll
+C:\Users\Denizka\Documents\GitHub\ksis\2LabLast\ServerProject\ServerProject\bin\Debug\CommonLibrary.pdb
+C:\Users\Denizka\Documents\GitHub\ksis\2LabLast\ServerProject\ServerProject\bin\Debug\ShareFilesLibrary.pdb
+C:\Users\Denizka\Documents\GitHub\ksis\2LabLast\ServerProject\ServerProject\obj\Debug\ServerProject.csprojAssemblyReference.cache
+C:\Users\Denizka\Documents\GitHub\ksis\2LabLast\ServerProject\ServerProject\obj\Debug\ServerProject.csproj.CoreCompileInputs.cache
+C:\Users\Denizka\Documents\GitHub\ksis\2LabLast\ServerProject\ServerProject\obj\Debug\ServerProject.csproj.CopyComplete
+C:\Users\Denizka\Documents\GitHub\ksis\2LabLast\ServerProject\ServerProject\obj\Debug\ServerProject.exe
+C:\Users\Denizka\Documents\GitHub\ksis\2LabLast\ServerProject\ServerProject\obj\Debug\ServerProject.pdb
