@@ -45,6 +45,48 @@ namespace ClientProject
             rooms = new List<RoomInfo>();
         }
 
+        private Dictionary<int, string> GetCopyOfLoadedFilesDictionary(Dictionary<int, string> filesToLoad)
+        {
+            Dictionary<int, string> files = new Dictionary<int, string>();
+            foreach (var file in filesToLoad)
+            {
+                files.Add(file.Key, file.Value);
+            }
+            return files;
+        }
+
+        private FileCommonMessage GetFileCommonMessage(string content, Dictionary<int, string> filesToLoad)
+        {
+            IPEndPoint clientIp = (IPEndPoint)(tcpSocket.LocalEndPoint);
+            return new FileCommonMessage(DateTime.Now, clientIp.Address, clientIp.Port, content, id, filesToLoad);
+        }
+
+        private FileIndividualMessage GetFileIndividualMessage(string content, int receiverId, Dictionary<int, string> files)
+        {
+            IPEndPoint clientIp = (IPEndPoint)(tcpSocket.LocalEndPoint);
+            return new FileIndividualMessage(DateTime.Now, clientIp.Address, clientIp.Port, content, id, receiverId, files);
+        }
+
+        public void SendFileMessage(string content, int selectedDialog, Dictionary<int, string> filesToLoad)
+        {
+            var files = GetCopyOfLoadedFilesDictionary(filesToLoad);
+
+            if (participants[selectedDialog].Id == 0)
+            {
+                tcpSocket.Send(messageSerializer.Serialize(GetFileCommonMessage(content, files)));
+            }
+            else
+            {
+                var fileIndividualMessage = GetFileIndividualMessage(content, participants[selectedDialog].Id, files);
+                if (fileIndividualMessage.SenderId != fileIndividualMessage.ReceiverId)
+                {
+                    tcpSocket.Send(messageSerializer.Serialize(fileIndividualMessage));
+                }
+                participants[selectedDialog].MessageHistory.Add(fileIndividualMessage);
+                ReceiveMessageEvent(fileIndividualMessage);
+            }
+        }
+
         public void ConnectToServer(int serverIndex, string clientName)
         {
             try
@@ -106,6 +148,14 @@ namespace ClientProject
                     {
                         chatParticipant.MessageHistory.Add(individualChatMessage);
                         chatParticipant.NotReadedMessageCountIncrement(individualChatMessage);
+                        if (individualChatMessage is FileIndividualMessage)
+                        {
+                            var fileIndividualMessage = (FileIndividualMessage)individualChatMessage;
+                            foreach (var file in fileIndividualMessage.Files)
+                            {
+                                chatParticipant.Files.Add(file.Key, file.Value);
+                            }
+                        }
                         break;
                     }
                 }
@@ -113,6 +163,14 @@ namespace ClientProject
             else
             {
                 participants[0].NotReadedMessageCountIncrement(commonChatMessage);
+                if (commonChatMessage is FileCommonMessage)
+                {
+                    var fileCommonMessage = (FileCommonMessage)commonChatMessage;
+                    foreach (var file in fileCommonMessage.Files)
+                    {
+                        participants[0].Files.Add(file.Key, file.Value);
+                    }
+                }
             }
         }
 

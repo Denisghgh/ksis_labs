@@ -32,7 +32,6 @@
             this.connectButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.currentChatLabel = new System.Windows.Forms.Label();
-            this.chatTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.participantsListBox = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -47,6 +46,13 @@
             this.roomsParticipantsListBox = new System.Windows.Forms.ListBox();
             this.inviteRoomButton = new System.Windows.Forms.Button();
             this.exitRoomButton = new System.Windows.Forms.Button();
+            this.AvaibleFilesListBox = new System.Windows.Forms.ListBox();
+            this.DownloadFileButton = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.AddFileButton = new System.Windows.Forms.Button();
+            this.FilesToLoadListBox = new System.Windows.Forms.ListBox();
+            this.DeleteFileButton = new System.Windows.Forms.Button();
+            this.ChatListBox = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // serversListBox
@@ -88,16 +94,6 @@
             this.currentChatLabel.Size = new System.Drawing.Size(88, 24);
             this.currentChatLabel.TabIndex = 4;
             this.currentChatLabel.Text = "common";
-            // 
-            // chatTextBox
-            // 
-            this.chatTextBox.Location = new System.Drawing.Point(146, 48);
-            this.chatTextBox.Multiline = true;
-            this.chatTextBox.Name = "chatTextBox";
-            this.chatTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.chatTextBox.Size = new System.Drawing.Size(380, 160);
-            this.chatTextBox.TabIndex = 5;
-            this.chatTextBox.TextChanged += new System.EventHandler(this.chatTextBox_TextChanged);
             // 
             // label2
             // 
@@ -234,11 +230,90 @@
             this.exitRoomButton.UseVisualStyleBackColor = true;
             this.exitRoomButton.Click += new System.EventHandler(this.exitRoomButton_Click);
             // 
+            // AvaibleFilesListBox
+            // 
+            this.AvaibleFilesListBox.FormattingEnabled = true;
+            this.AvaibleFilesListBox.Location = new System.Drawing.Point(865, 48);
+            this.AvaibleFilesListBox.Name = "AvaibleFilesListBox";
+            this.AvaibleFilesListBox.Size = new System.Drawing.Size(160, 212);
+            this.AvaibleFilesListBox.TabIndex = 27;
+            // 
+            // DownloadFileButton
+            // 
+            this.DownloadFileButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DownloadFileButton.Location = new System.Drawing.Point(865, 262);
+            this.DownloadFileButton.Name = "DownloadFileButton";
+            this.DownloadFileButton.Size = new System.Drawing.Size(160, 24);
+            this.DownloadFileButton.TabIndex = 26;
+            this.DownloadFileButton.Text = "Download file";
+            this.DownloadFileButton.UseVisualStyleBackColor = true;
+            this.DownloadFileButton.Click += new System.EventHandler(this.DownloadFileButton_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(861, 17);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(137, 24);
+            this.label8.TabIndex = 25;
+            this.label8.Text = "Message Files:";
+            // 
+            // AddFileButton
+            // 
+            this.AddFileButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AddFileButton.Location = new System.Drawing.Point(679, 236);
+            this.AddFileButton.Name = "AddFileButton";
+            this.AddFileButton.Size = new System.Drawing.Size(162, 24);
+            this.AddFileButton.TabIndex = 24;
+            this.AddFileButton.Text = "Add file";
+            this.AddFileButton.UseVisualStyleBackColor = true;
+            this.AddFileButton.Click += new System.EventHandler(this.AddFileButton_Click);
+            // 
+            // FilesToLoadListBox
+            // 
+            this.FilesToLoadListBox.AllowDrop = true;
+            this.FilesToLoadListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.FilesToLoadListBox.FormattingEnabled = true;
+            this.FilesToLoadListBox.ItemHeight = 15;
+            this.FilesToLoadListBox.Location = new System.Drawing.Point(679, 215);
+            this.FilesToLoadListBox.Name = "FilesToLoadListBox";
+            this.FilesToLoadListBox.ScrollAlwaysVisible = true;
+            this.FilesToLoadListBox.Size = new System.Drawing.Size(162, 19);
+            this.FilesToLoadListBox.TabIndex = 23;
+            // 
+            // DeleteFileButton
+            // 
+            this.DeleteFileButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DeleteFileButton.Location = new System.Drawing.Point(679, 257);
+            this.DeleteFileButton.Name = "DeleteFileButton";
+            this.DeleteFileButton.Size = new System.Drawing.Size(162, 24);
+            this.DeleteFileButton.TabIndex = 22;
+            this.DeleteFileButton.Text = "Delete file";
+            this.DeleteFileButton.UseVisualStyleBackColor = true;
+            this.DeleteFileButton.Click += new System.EventHandler(this.DeleteFileButton_Click);
+            // 
+            // ChatListBox
+            // 
+            this.ChatListBox.FormattingEnabled = true;
+            this.ChatListBox.Location = new System.Drawing.Point(145, 43);
+            this.ChatListBox.Name = "ChatListBox";
+            this.ChatListBox.Size = new System.Drawing.Size(380, 173);
+            this.ChatListBox.TabIndex = 28;
+            this.ChatListBox.SelectedIndexChanged += new System.EventHandler(this.ChatListBox_SelectedIndexChanged);
+            // 
             // ChatForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(848, 312);
+            this.ClientSize = new System.Drawing.Size(1043, 331);
+            this.Controls.Add(this.ChatListBox);
+            this.Controls.Add(this.AvaibleFilesListBox);
+            this.Controls.Add(this.DownloadFileButton);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.AddFileButton);
+            this.Controls.Add(this.FilesToLoadListBox);
+            this.Controls.Add(this.DeleteFileButton);
             this.Controls.Add(this.exitRoomButton);
             this.Controls.Add(this.inviteRoomButton);
             this.Controls.Add(this.label7);
@@ -252,7 +327,6 @@
             this.Controls.Add(this.messageTextBox);
             this.Controls.Add(this.participantsListBox);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.chatTextBox);
             this.Controls.Add(this.currentChatLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.connectButton);
@@ -271,7 +345,6 @@
         private System.Windows.Forms.Button connectButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label currentChatLabel;
-        private System.Windows.Forms.TextBox chatTextBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListBox participantsListBox;
         private System.Windows.Forms.Label label3;
@@ -287,6 +360,13 @@
         private System.Windows.Forms.ListBox roomsParticipantsListBox;
         private System.Windows.Forms.Button inviteRoomButton;
         private System.Windows.Forms.Button exitRoomButton;
+        private System.Windows.Forms.ListBox AvaibleFilesListBox;
+        private System.Windows.Forms.Button DownloadFileButton;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button AddFileButton;
+        private System.Windows.Forms.ListBox FilesToLoadListBox;
+        private System.Windows.Forms.Button DeleteFileButton;
+        private System.Windows.Forms.ListBox ChatListBox;
     }
 }
 

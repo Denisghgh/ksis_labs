@@ -16,6 +16,7 @@ namespace CommonLibrary
         public string Name { get; }
         public int Id { get; }
         public List<Messages> MessageHistory { get; set; }
+        public Dictionary<int, string> Files { get; set; }
         public string NotReadedMessageString 
         {
             get
@@ -27,10 +28,11 @@ namespace CommonLibrary
         public event NotReadedMessageCountDelegate NotReadedMessageEvent;
         public event ReadMessageDelegate ReadedMessageEvent;
 
-        public NewChatParticipant(string name, int id, List<Messages> messageHistory)
+        public NewChatParticipant(string name, int id, List<Messages> messageHistory, Dictionary<int, string> files)
         {
             Name = name;
             Id = id;
+            Files = files;
             MessageHistory = messageHistory;
             NotReadedMessageCount = 0;
         }

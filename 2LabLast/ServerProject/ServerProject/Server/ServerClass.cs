@@ -414,10 +414,10 @@ namespace ServerProject
         private ParticipantsListMessages GetParticipantsListMessage()
         {
             List<NewChatParticipant> participantsList = new List<NewChatParticipant>();
-            participantsList.Add(new NewChatParticipant(CommonChatName, CommonChatId, new List<Messages>()));
+            participantsList.Add(new NewChatParticipant(CommonChatName, CommonChatId, new List<Messages>(), new Dictionary<int, string>()));
             foreach (ClientHandler clientHandler in clients)
             {
-                participantsList.Add(new NewChatParticipant(clientHandler.name, clientHandler.id, new List<Messages>()));
+                participantsList.Add(new NewChatParticipant(clientHandler.name, clientHandler.id, new List<Messages>(), new Dictionary<int, string>()));
             }
             IPEndPoint serverIp = (IPEndPoint)(tcpSocket.LocalEndPoint);
             ParticipantsListMessages participantsListMessage = new ParticipantsListMessages(DateTime.Now, serverIp.Address, serverIp.Port, participantsList);

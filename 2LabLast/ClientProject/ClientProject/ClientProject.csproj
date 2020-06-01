@@ -113,6 +113,10 @@
       <Project>{2EC1635E-8D88-4174-8076-745A3F96618D}</Project>
       <Name>CommonLibrary</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\FileSharingLibrary\ShareFilesLibrary.csproj">
+      <Project>{E8826F3F-6725-4DF1-B173-AE3EC1DB3041}</Project>
+      <Name>ShareFilesLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,6 +1,8 @@
 ﻿using CommonLibrary;
+using FileSharingLibrary;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http.Headers;
 using System.Windows.Forms;
 using Messages = CommonLibrary.Messages;
@@ -12,7 +14,11 @@ namespace ClientProject
         public const int DefaultSelectedDialog = 0;
         private const string CommonChatName = "Common";
         private const int CommonChatId = 0;
+        private const string FileSharingServerUrl = "http://localhost:8888/";
+
         public ClientClass client;
+        public FileSharingClient fileSharingClient;
+
         private int selectedDialog = -1;
         private int selectedRoom = -1;
         private string clientUsername;
@@ -32,12 +38,23 @@ namespace ClientProject
             InitializeComponent();
 
             client = new ClientClass(new BinaryMessagesSerializer());
+            fileSharingClient = new FileSharingClient();
             client.ReceiveMessageEvent += ShowReceivedMessage;
             client.UnreadMessageEvent += UnreadMessageHandler;
             client.ReadMessageEvent += ReadMessageHandler;
             client.DeleteRoomEvent += HandleDeletedRoomUi;
+            fileSharingClient.UpdateFilesToLoadListEvent += UpdateFilesToLoadList;
             client.SearchServers();
             VisibleSettings(false);          
+        }
+
+        private void UpdateFilesToLoadList(Dictionary<int, string> files)
+        {
+            FilesToLoadListBox.Items.Clear();
+            foreach (var file in files)
+            {
+                FilesToLoadListBox.Items.Add(file.Value);
+            }
         }
 
         private void ReadMessageHandler(Messages message)
@@ -119,7 +136,7 @@ namespace ClientProject
                 if (selectedDialog == 0)
                 {
                     string chatContent = "[" + commonChatMessage.DateTime.ToString() + " " + commonChatMessage.SenderIp.ToString() + ":" + commonChatMessage.SenderPort + "]: \"" + client.participants[commonChatMessage.SenderId].Name + "\": " + commonChatMessage.Content + "\r\n";
-                    chatTextBox.Text += chatContent;
+                    ChatListBox.Items.Add(chatContent);
                 }                        
             };
             if (InvokeRequired)
@@ -176,7 +193,7 @@ namespace ClientProject
         {
             Action action = delegate
             {
-                chatTextBox.Clear();
+                ChatListBox.Items.Clear();
                 if ((messageHistory != null)&&(messageHistory.Count != 0))
                     foreach (Messages message in messageHistory)
                     {
@@ -200,7 +217,7 @@ namespace ClientProject
                 if (individualChatMessage.ReceiverId == selectedDialog)
                 {
                     string chatContent = "[" + individualChatMessage.DateTime.ToString() + " " + individualChatMessage.SenderIp.ToString() + ":" + individualChatMessage.SenderPort + "]: \"" + client.participants[individualChatMessage.SenderId].Name + "\": " + individualChatMessage.Content + "\r\n";
-                    chatTextBox.Text += chatContent;
+                    ChatListBox.Items.Add(chatContent);
                 }
             };
             if (InvokeRequired)
@@ -220,7 +237,7 @@ namespace ClientProject
                 if (individualChatMessage.SenderId == selectedDialog)
                 {
                     string chatContent = "[" + individualChatMessage.DateTime.ToString() + " " + individualChatMessage.SenderIp.ToString() + ":" + individualChatMessage.SenderPort + "]: \"" + client.participants[individualChatMessage.SenderId].Name + "\": " + individualChatMessage.Content + "\r\n";
-                    chatTextBox.Text += chatContent;
+                    ChatListBox.Items.Add(chatContent);
                 }
             };
             if (InvokeRequired)
@@ -256,7 +273,7 @@ namespace ClientProject
                 if (selectedRoom == roomMessage.RoomId)
                 {
                     string chatContent = "[" + roomMessage.DateTime.ToString() + " " + roomMessage.SenderIp.ToString() + ":" + roomMessage.SenderPort + "]: \"" + client.participants[roomMessage.SenderId].Name + "\": " + roomMessage.Content + "\r\n";
-                    chatTextBox.Text += chatContent;
+                    ChatListBox.Items.Add(chatContent);
                 }
             };
             if (InvokeRequired)
@@ -338,15 +355,22 @@ namespace ClientProject
                 e.Cancel = true;
             }
         }
+
         private void VisibleSettings(bool isVisible)
         {
             participantsListBox.Visible = isVisible;
             label2.Visible = isVisible;
             label1.Visible = isVisible;
             currentChatLabel.Visible = isVisible;
-            chatTextBox.Visible = isVisible;
+            ChatListBox.Visible = isVisible;
             messageTextBox.Visible = isVisible;
             sendMessageButton.Visible = isVisible;
+            AddFileButton.Visible = isVisible;
+            DeleteFileButton.Visible = isVisible;
+            FilesToLoadListBox.Visible = isVisible;
+            label8.Visible = true;
+            AvaibleFilesListBox.Visible = true;
+            DownloadFileButton.Visible = true;
         }
         
         private void Connect()
@@ -369,7 +393,18 @@ namespace ClientProject
         {
             if (roomsListBox.SelectedIndex == -1)
             {
-                client.SendMessage(messageTextBox.Text, selectedDialog);
+                if (FilesToLoadListBox.Items.Count == 0)
+                {
+                    client.SendMessage(messageTextBox.Text, selectedDialog);
+                }
+                else
+                {
+                    client.SendFileMessage(messageTextBox.Text, selectedDialog, fileSharingClient.filesToSendDictionary);
+                    fileSharingClient.totalFilesToLoadSize = 0;
+                    fileSharingClient.filesToSendDictionary.Clear();
+                    FilesToLoadListBox.Items.Clear();
+                }
+                messageTextBox.Clear();
             }
             else
             {
@@ -422,13 +457,6 @@ namespace ClientProject
             Owner.Hide();
         }
 
-        private void chatTextBox_TextChanged(object sender, EventArgs e)
-        {
-            chatTextBox.SelectionStart = chatTextBox.Text.Length;
-            chatTextBox.ScrollToCaret();
-            chatTextBox.Refresh();
-        }
-
         private void CreateRoomButton_Click(object sender, EventArgs e)
         {
             var createRoomForm = new CreateRoomForm(client.participants.GetRange(1, client.participants.Count - 1), client.id);
@@ -476,6 +504,146 @@ namespace ClientProject
                 {
                     client.SendInviteRoomMessage(selectedRoom, roomParticipantsIndecies);
                 }
+            }
+        }
+
+
+
+        private async void AddFileButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var openFileDialog = new OpenFileDialog();
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    var filePath = openFileDialog.FileName;
+                    await fileSharingClient.SendFile(filePath, FileSharingServerUrl);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Исключение: " + ex.Message);
+            }
+        }
+
+        private async void DeleteFileButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var selectedFileIndex = FilesToLoadListBox.SelectedIndex;
+                if (selectedFileIndex > -1 && selectedFileIndex < FilesToLoadListBox.Items.Count)
+                {
+                    var fileInfo = FilesToLoadListBox.Items[selectedFileIndex].ToString();
+                    var fileId = fileSharingClient.GetFileIdByInfoInFilesToLoadList(fileInfo);
+                    if (fileId != -1)
+                    {
+                        await fileSharingClient.DeleteFile(fileId, FileSharingServerUrl);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Id файла с таким названием не найдено!", "Error!");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Исключение: " + ex.Message);
+            }
+        }
+
+        private Dictionary<int, string> GetFilesByMessageIndex()
+        {
+            var messages = client.participants[selectedDialog].MessageHistory;
+            var selectedIndex = ChatListBox.SelectedIndex;
+            if (selectedIndex != -1)
+            {
+                var i = 0;
+                foreach (var message in messages)
+                {
+                    if (i == selectedIndex)
+                    {
+                        if (message is FileCommonMessage)
+                        {
+                            return (((FileCommonMessage)message).Files);
+                        }
+                        if (message is FileIndividualMessage)
+                        {
+                            return (((FileIndividualMessage)message).Files);
+                        }
+                        break;
+                    }
+                    i++;
+                }
+            }
+            return null;
+        }
+
+        private int GetFileIdByFileInfo(string fileInfo)
+        {
+            var files = GetFilesByMessageIndex();
+            foreach (var file in files)
+            {
+                if (fileInfo == file.Value)
+                {
+                    return file.Key;
+                }
+            }
+            return -1;
+        }
+
+        private async void DownloadFileButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var selectedFileIndex = AvaibleFilesListBox.SelectedIndex;
+                if (selectedFileIndex > -1 && selectedFileIndex < AvaibleFilesListBox.Items.Count)
+                {
+                    var fileInfo = AvaibleFilesListBox.Items[selectedFileIndex].ToString();
+                    var fileId = GetFileIdByFileInfo(fileInfo);
+                    if (fileId != -1)
+                    {
+                        var downloadFile = await fileSharingClient.DownloadFile(fileId, FileSharingServerUrl);
+                        if (downloadFile != null)
+                        {
+                            var saveFileDialog = new SaveFileDialog();
+                            saveFileDialog.FileName = downloadFile.FileName;
+                            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                            {
+                                var filePath = saveFileDialog.FileName;
+                                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                                {
+                                    fileStream.Write(downloadFile.FileBytes, 0, downloadFile.FileBytes.Length);
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Id файла с таким названием не найдено!", "Error!");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Исключение: " + ex.Message);
+            }
+        }
+
+        private void ShowFiles(Dictionary<int, string> files)
+        {
+            AvaibleFilesListBox.Items.Clear();
+            foreach (var file in files)
+            {
+                AvaibleFilesListBox.Items.Add(file.Value);
+            }
+        }
+
+        private void ChatListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var files = GetFilesByMessageIndex();
+            if (files != null)
+            {
+                ShowFiles(files);
             }
         }
     }

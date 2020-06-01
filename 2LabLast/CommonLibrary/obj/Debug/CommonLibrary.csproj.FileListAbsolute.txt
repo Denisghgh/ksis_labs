@@ -31,3 +31,15 @@ C:\Users\asus\Desktop\ksis_labs\2LabLast\CommonLibrary\bin\Debug\CommonLibrary.p
 C:\Users\asus\Desktop\ksis_labs\2LabLast\CommonLibrary\obj\Debug\CommonLibrary.csprojAssemblyReference.cache
 C:\Users\asus\Desktop\ksis_labs\2LabLast\CommonLibrary\obj\Debug\CommonLibrary.dll
 C:\Users\asus\Desktop\ksis_labs\2LabLast\CommonLibrary\obj\Debug\CommonLibrary.pdb
+C:\Users\User\Desktop\ksis_labs\2LabLast\CommonLibrary\bin\Debug\CommonLibrary.dll
+C:\Users\User\Desktop\ksis_labs\2LabLast\CommonLibrary\bin\Debug\CommonLibrary.pdb
+C:\Users\User\Desktop\ksis_labs\2LabLast\CommonLibrary\obj\Debug\CommonLibrary.csprojAssemblyReference.cache
+C:\Users\User\Desktop\ksis_labs\2LabLast\CommonLibrary\obj\Debug\CommonLibrary.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\ksis_labs\2LabLast\CommonLibrary\obj\Debug\CommonLibrary.dll
+C:\Users\User\Desktop\ksis_labs\2LabLast\CommonLibrary\obj\Debug\CommonLibrary.pdb
+C:\Users\Denizka\DenisFolder\KSiS\NotMein\10\ksis_labs\2LabLast\CommonLibrary\bin\Debug\CommonLibrary.dll
+C:\Users\Denizka\DenisFolder\KSiS\NotMein\10\ksis_labs\2LabLast\CommonLibrary\bin\Debug\CommonLibrary.pdb
+C:\Users\Denizka\DenisFolder\KSiS\NotMein\10\ksis_labs\2LabLast\CommonLibrary\obj\Debug\CommonLibrary.csproj.CoreCompileInputs.cache
+C:\Users\Denizka\DenisFolder\KSiS\NotMein\10\ksis_labs\2LabLast\CommonLibrary\obj\Debug\CommonLibrary.dll
+C:\Users\Denizka\DenisFolder\KSiS\NotMein\10\ksis_labs\2LabLast\CommonLibrary\obj\Debug\CommonLibrary.pdb
+C:\Users\Denizka\DenisFolder\KSiS\NotMein\10\ksis_labs\2LabLast\CommonLibrary\obj\Debug\CommonLibrary.csprojAssemblyReference.cache
